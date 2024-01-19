@@ -23,7 +23,6 @@ async function testFunction(){
                     
                     //case:01 Click create function
                     await fun.clickOnStep(stepIndex.FUNCTION);
-                        
                 }).timeout(30000); 
 
                 it('Case:02 write empty function name',async function(){

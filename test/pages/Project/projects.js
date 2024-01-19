@@ -241,11 +241,9 @@ class Projects extends Login{
         this.scriptSlider = await this.driver.findElement(By.xpath('//div[contains(@class , "script_slider")]'));
         await super.waitForContentToBeVisible(this.scriptSlider , 10000);
     }
-    
+
     async clickOnScript(){
-        await super.waitForContentToLoad(By.xpath('//span[text() = "FLOWS"]') , 10000);
-        const flowTextSpanElement = await this.driver.findElement(By.xpath('//span[text() = "FLOWS"]'));
-        this.listOfScripts = await flowTextSpanElement.findElements(By.xpath('following-sibling::div'));
+        await this.getListOfScripts();
         await this.listOfScripts[0].click();
         await super.waitForEndpoint(endpoints.EDIT , 10000);
     }
@@ -253,6 +251,7 @@ class Projects extends Login{
     async getListOfScripts(){
         await super.waitForContentToLoad(By.xpath('//span[text() = "FLOWS"]') , 10000);
         const flowTextSpanElement = await this.driver.findElement(By.xpath('//span[text() = "FLOWS"]'));
+        await this.driver.sleep(5000);
         this.listOfScripts = await flowTextSpanElement.findElements(By.xpath('following-sibling::div'));
         let nameOfScripts = [];
         for(let i=0 ; i<this.listOfScripts.length ; ++i){
