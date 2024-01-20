@@ -23,7 +23,7 @@ async function testIfBlockStep(){
             await ifStep.clickOnProjectName();
             await ifStep.waitForScriptSlider();
             await ifStep.clickOnNewFlow();
-            await ifStep.clickOnScript();
+            // await ifStep.clickOnScript();
             await ifStep.closeSlider(); // close trigger slider
             await ifStep.waitForFlowPageToOpen();
             await ifStep.clickOnAddSteps();
@@ -32,12 +32,13 @@ async function testIfBlockStep(){
             await ifStep.createConditionIf("true");
             const text_name=await ifStep.responseOfIfBlockIf();
             expect(text_name).to.include("true");
-            // await ifStep.crossIfBlock();
-            await ifStep.deleteIfBlock();
+            await ifStep.crossIfBlock();
+            // await ifStep.deleteIfBlock();
         }).timeout(700000);
        
         it("if block created successfully with false condition",async function(){
             // await ifStep.waitFor5Min();
+            // await ifStep.waitForFlowPageToOpen();
             await ifStep.clickOnAddSteps();
             await ifStep.getAllStepsUsedFlow();
             await ifStep.clickOnStep(stepIndex.IF);
@@ -45,7 +46,7 @@ async function testIfBlockStep(){
             const text_name=await ifStep.responseOfIfBlockIf();
             expect(text_name).to.include("false");
             // await ifStep.crossIfBlock();
-            await ifStep.deleteIfBlock();
+            // await ifStep.deleteIfBlock();
         }).timeout(700000);
     });
 };
