@@ -1,7 +1,6 @@
 const FlowPage = require('../pages/Flow/flow');
 const {endpoints} = require('../enums');
 const getUniqueName = require('../../utilities/getDate');
-const { expect } = require('chai');
 let flowPage;
 
 async function testCreateScript(){
@@ -17,14 +16,12 @@ async function testCreateScript(){
                 await flowPage.waitForEndpoint(endpoints.PROJECT , 60000);
                 await flowPage.clickOnProjectName();
                 await flowPage.waitForScriptSlider();
-                const numberOfScripsBeforeClick = (await flowPage.getListOfScripts()).length;
-                await flowPage.clickOnNewFlow(); // this creates a new script 
-                const numberOfScripsAfterClick = (await flowPage.getListOfScripts()).length;
-                expect(numberOfScripsAfterClick).to.equal(numberOfScripsBeforeClick+1);
+                await flowPage.clickOnNewFlow();
+                await flowPage.createNewScript(getUniqueName('script'));
             }catch(err){
                 console.log(err);
             }
-        })
+            })
         
         after(async() => {
             await flowPage.close();

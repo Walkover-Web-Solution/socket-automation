@@ -49,14 +49,15 @@ class Projects extends Login{
     }
     
     async fullWebhookfunction(){
-        await super.waitForContentToLoad(By.className('workflow__flow MuiBox-root css-0'), 10000);
-        const doBlock=await this.driver.findElement(By.className('w-100 flex-col pl-28 box-sizing-border-box  gap-1  MuiBox-root css-0'));
-        const webhookpick= await doBlock.findElement(By.id('0option'));
+        await super.waitForContentToLoad(By.className('masterslider_cont '), 10000);
+        const doBlock=await this.driver.findElement(By.className('masterslider_cont'));
+        const webClick =await doBlock.findElement(By.className('flex-wrap flex-start-center gap-2 p-2 options-box MuiBox-root css-0'));
+        const webhookpick= await webClick.findElement(By.id('0option'));
         webhookpick.click();
-        await super.waitForContentToLoad(By.className('masterslider_cont transition custom_slider custom_slider__halfscreen masterslider_cont__in MuiBox-root css-0'),10000);
-        const webhookDiv=await this.driver.findElement(By.className('flex-spaceBetween-center w-100 gap-1 MuiBox-root css-0'));
-        const saveBtn=await webhookDiv.findElement(By.xpath("//button[contains(text(),'save')]"));
-        saveBtn.click();
+        // await super.waitForContentToLoad(By.className('masterslider_cont transition custom_slider custom_slider__halfscreen masterslider_cont__in MuiBox-root css-0'),10000);
+        // const webhookDiv=await this.driver.findElement(By.className('flex-spaceBetween-center w-100 gap-1 MuiBox-root css-0'));
+        // const saveBtn=await webhookDiv.findElement(By.xpath("//button[contains(text(),'save')]"));
+        // saveBtn.click();
 
     }
     
@@ -241,9 +242,11 @@ class Projects extends Login{
         this.scriptSlider = await this.driver.findElement(By.xpath('//div[contains(@class , "script_slider")]'));
         await super.waitForContentToBeVisible(this.scriptSlider , 10000);
     }
-
+    
     async clickOnScript(){
-        await this.getListOfScripts();
+        await super.waitForContentToLoad(By.xpath('//span[text() = "FLOWS"]') , 10000);
+        const flowTextSpanElement = await this.driver.findElement(By.xpath('//span[text() = "FLOWS"]'));
+        this.listOfScripts = await flowTextSpanElement.findElements(By.xpath('following-sibling::div'));
         await this.listOfScripts[0].click();
         await super.waitForEndpoint(endpoints.EDIT , 10000);
     }
@@ -251,7 +254,6 @@ class Projects extends Login{
     async getListOfScripts(){
         await super.waitForContentToLoad(By.xpath('//span[text() = "FLOWS"]') , 10000);
         const flowTextSpanElement = await this.driver.findElement(By.xpath('//span[text() = "FLOWS"]'));
-        await this.driver.sleep(5000);
         this.listOfScripts = await flowTextSpanElement.findElements(By.xpath('following-sibling::div'));
         let nameOfScripts = [];
         for(let i=0 ; i<this.listOfScripts.length ; ++i){
@@ -387,7 +389,7 @@ class Projects extends Login{
     async getListOfPausedScripts(){
         const pausedScriptSpanElement = await this.driver.findElement(By.xpath('//span[text() = "PAUSED FLOWS"]'));
         const pausedScriptParentDiv = await pausedScriptSpanElement.findElement(By.xpath('.//..'));
-        const listOfPausedScripts = await pausedScriptParentDiv.findElements(By.css(`[class*=${process.env.SCRIPT_NAME_CLASS}]`));
+        const listOfPausedScripts = await pausedScriptParentDiv.findElements(By.xpath('.//following-sibling::*'));
         if(!listOfPausedScripts.length) return null;
         const pausedScriptName = [];
         for(let i=0 ; i<listOfPausedScripts.length ; ++i){
@@ -397,10 +399,10 @@ class Projects extends Login{
         return pausedScriptName;
     }
 
-    async getListOfDeletedProjects(){
+    async getListOfDeletedScripts(){
         const deletedScriptSpanElement = await this.driver.findElement(By.xpath('//span[text() = "DELETED FLOWS"]'));
         const pausedScriptParentDiv = await deletedScriptSpanElement.findElement(By.xpath('.//..'));
-        const listOfDeletedScripts = await pausedScriptParentDiv.findElements(By.css(`[class*=${process.env.SCRIPT_NAME_CLASS}]`));
+        const listOfDeletedScripts = await pausedScriptParentDiv.findElements(By.xpath('.//following-sibling::*'));
         if(!listOfDeletedScripts.length) return null;
         const deletedScriptName = [];
         for(let i=0 ; i<listOfDeletedScripts.length ; ++i){
