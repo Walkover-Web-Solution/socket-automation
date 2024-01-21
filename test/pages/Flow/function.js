@@ -4,6 +4,9 @@ const {endpoints} = require('../../enums');
 const {By,until,Key} = require('selenium-webdriver');
 const getButtonHavingText = require('../../../utilities/getButtonHavingText');
 const fs = require('fs');
+// import org.openqa.selenium.JavascriptExecutor;
+
+// JavascriptExecutor js = (JavascriptExecutor) driver;
 
 class Function extends FlowPage{
     constructor(){
@@ -30,23 +33,35 @@ class Function extends FlowPage{
     }
 
     async dryrun(){
-        await this.driver.sleep(2000);
-        const button = await this.driver.findElement(By.xpath(`//div[1]//div[1]//div[2]//div[2]//div[1]//div[1]//div[1]//div[1]//div[2]//div[1]//button[1]`));
-        await button.click();
+        // const custom =await this.driver.findElement(By.className("custom_slider__suggestion_box")); 
+        // const arear= await custom.findElement(By.className('flex-end-center gap-2 MuiBox-root css-0'));
+        // const closeButton = await arear.findElement(By.className("MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-lr0yxz"));
+        // closeButton.click();
+        await super.waitForContentToLoad(By.className('functionActionDialogMainContainer mt-1 MuiBox-root css-0'),1000);
+        const stepNameInput = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        const createBtn = stepNameInput.findElement(By.xpath(`//*[@id="root"]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[3]/div/button[1]`));
+        await createBtn.click();
     }
 
     async create(){
-        await this.driver.sleep(2000);
-        const createButton = await this.driver.findElement(By.xpath(`//button[normalize-space()='Update']`));
+        const stepNameInput = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        const createButton = stepNameInput.findElement(By.xpath(`//button[normalize-space()='Update']`));
         await createButton.click();
     }
 
-    async writeFunction(){
-        await this.driver.sleep(2000);
-        const editor = await this.driver.findElement(By(xpath(`/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/textarea[1]`)));
+    async writeFunction(content){
+        await super.waitForContentToLoad(By.css('[class*="custom_slider__halfscreen"]'));
+        const functionBlock= await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        const editor = await functionBlock.findElement(By.className('ace_comment ace_placeholder'));
         await editor.click();
-        //await editor.sendKeys("Return true");
+        const textArea= functionBlock.findElement(By.className('ace_text-input'));
+        textArea.sendKeys("return true");
+   
+   
+       
     }
+   
+ 
 
     async clearField(){
         await this.driver.sleep(2000);
@@ -64,7 +79,7 @@ class Function extends FlowPage{
     async closeFunctionSlider(){
         const closeButton = await this.driver.findElement(By.xpath(`//button[@aria-label='Close']//*[name()='svg']`));
         await closeButton.click();
-        await this.driver.sleep(5000);
+        // await this.driver.sleep(5000);
     }
 
     async getSuccessMessage() {

@@ -329,14 +329,35 @@ class FlowPage extends Projects{
 
     async takeScreenShotFunctionSlider(imagePath){
         const stepNameInput = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
-        await this.driver.executeScript('arguments[0].scrollIntoView(true)' , this.apiEditPanel);
+        // await this.driver.executeScript('arguments[0].scrollIntoView(true)' , this.apiEditPanel);
         const screenShot = await stepNameInput.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+
+    async takeScreenShotFunctionBlock(imagePath){
+        const stepNameInput = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        const screenShot = await stepNameInput.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+
+    async takeScreenShotFunctionName(imagePath){
+        const stepNameInput = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        const stepName = stepNameInput.findElement(By.className('flex-center w-100 gap-1 MuiBox-root css-0'));
+        const screenShot = await stepName.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot , imagePath);
     }
 
     async takeScreenShotVariableSlider(imagePath){
         await super.waitForContentToLoad(By.css('[class*="custom_slider__halfscreen"]') , 10000);
         const stepNameInput = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        await this.driver.executeScript('arguments[0].scrollIntoView(true)' , stepNameInput);
+        const screenShot = await stepNameInput.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+
+    async takeScreenShotFunctionResponse(imagePath){
+        await super.waitForContentToLoad(By.className('__json-boolean__') , 10000);
+        const stepNameInput = await this.driver.findElement(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[4]/div[2]/div'));
         await this.driver.executeScript('arguments[0].scrollIntoView(true)' , stepNameInput);
         const screenShot = await stepNameInput.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot , imagePath);
