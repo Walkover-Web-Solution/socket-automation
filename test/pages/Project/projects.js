@@ -54,6 +54,7 @@ class Projects extends Login{
         const webClick =await doBlock.findElement(By.className('flex-wrap flex-start-center gap-2 p-2 options-box MuiBox-root css-0'));
         const webhookpick= await webClick.findElement(By.id('0option'));
         webhookpick.click();
+        await super.waitForContentToLoad(By.css('[class*="url_box"]'),10000);
         // await super.waitForContentToLoad(By.className('masterslider_cont transition custom_slider custom_slider__halfscreen masterslider_cont__in MuiBox-root css-0'),10000);
         // const webhookDiv=await this.driver.findElement(By.className('flex-spaceBetween-center w-100 gap-1 MuiBox-root css-0'));
         // const saveBtn=await webhookDiv.findElement(By.xpath("//button[contains(text(),'save')]"));
@@ -64,9 +65,9 @@ class Projects extends Login{
     async responseFunction(){
 
         const responseBlockFull=await this.driver.findElement(By.className('workflow  flex-col gap-3 mb-4  MuiBox-root css-0'));
-        const resBlock=await responseBlockFull.findElement(By.className('pl-28  w-100  MuiBox-root css-0'));
+        // const resBlock=await responseBlockFull.findElement(By.className('pl-28  w-100  MuiBox-root css-0'));
         await  super.waitForContentToLoad(By.xpath('//*[@id="response"]'), 10000);
-        const resBtn=await resBlock.findElement(By.xpath('//*[@id="response"]'));
+        const resBtn=await responseBlockFull.findElement(By.xpath('//*[@id="response"]'));
         resBtn.click();
         await super.waitForContentToLoad(By.className('responseslider column w-100 MuiBox-root css-0'),10000);
         const resSlider= this.driver.findElement(By.className('responseslider column w-100 MuiBox-root css-0')) ;
@@ -79,12 +80,15 @@ class Projects extends Login{
         const resSlider= await this.driver.findElement(By.className('mt-1 pos-rel MuiBox-root css-0')) ;
         const contentBtn= await resSlider.findElement(By.xpath("//*[text()='//Write return statement here...']"));
         contentBtn.click();
-        contentBtn.sendKeys(content); 
+        const contentEnter= await resSlider.findElement(By.className("ace_text-input"));
+        contentEnter.sendKeys(content); 
         const saveBtn=await resSlider.findElement(By.xpath("//*[text()='Save']"));
         saveBtn.click();
     }
     async responseOfWebhook(){
-        const responseElement=await this.driver.findElement(By.className('MuiTypography-root MuiTypography-h6 response__container__title  css-pbqldk'));
+        await super.waitForContentToLoad(By.id('alert-container-0'),10000);
+        await super.waitForContentToLoad(By.className("response__container__title"),10000);
+        const responseElement=await this.driver.findElement(By.className('response__container__title'));
         const text=responseElement.getText();
         return text
     }

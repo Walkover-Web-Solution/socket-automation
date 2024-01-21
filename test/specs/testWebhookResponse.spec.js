@@ -12,7 +12,7 @@ const responseAndWebhook= new ResponseAndWebhook();
 async function testWebhookResponse(){
         
             describe('Webhook Test Script', function () {
-                it('Webhook Block open', async function () {
+                it('Opening and creating webhook block ', async function () {
                     await responseAndWebhook.open(endpoints.HOME);
                     await responseAndWebhook.loginUser();
                     await responseAndWebhook.waitForEndpoint(endpoints.PROJECT , 60000);
@@ -27,18 +27,37 @@ async function testWebhookResponse(){
                     await responseAndWebhook.waitForFlowPageToOpen();
                     await responseAndWebhook.getAllStepsForIf();
                     await responseAndWebhook.fullWebhookfunction();
+                    await responseAndWebhook.takeScreenShotWebhookSlider('webhookSlider.png');
+                    const isCaptureMode = await responseAndWebhook.isCaptureMode;
+                    if(isCaptureMode) return;
+                    const comparisonResult = await responseAndWebhook.compareScreenShot('webhookSlider.png'); 
+                    const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+                    expect(num).to.be.lessThan(20);
                     await responseAndWebhook.closeSlider();
                         }).timeout(30000); 
 
-                it('Response Block open', async function () {
+                it('Opening response custom block', async function () {
                     await responseAndWebhook.waitForFlowPageToOpen();
                     await responseAndWebhook.responseFunction();
-                    await responseAndWebhook.customResponseEnter('Response working');
-                    const text_name=await responseAndWebhook.responseOfWebhook();
-                    expect(text_name).to.include("Response working");
-                        }).timeout(30000); 
-                        
+                    await responseAndWebhook.takeScreenShotWebhookResponseBlock('webhookResponseBlock.png');
+                    const isCaptureMode = await responseAndWebhook.isCaptureMode;
+                    if(isCaptureMode) return;
+                    const comparisonResult = await responseAndWebhook.compareScreenShot('webhookResponseBlock.png'); 
+                    const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+                    expect(num).to.be.lessThan(20);
                    
+                        }).timeout(30000); 
+                it('Entering data in custom response block and checking response ', async function () {
+                    await responseAndWebhook.customResponseEnter('Response working');
+                    const text_name= await responseAndWebhook.responseOfWebhook();
+                    expect(text_name).to.include("Response working");
+                    await responseAndWebhook.takeScreenShotWebhookResponse('webhookResponse.png');
+                    const isCaptureMode = await responseAndWebhook.isCaptureMode;
+                    if(isCaptureMode) return;
+                    const comparisonResult = await responseAndWebhook.compareScreenShot('webhookResponse.png'); 
+                    const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+                    expect(num).to.be.lessThan(20);
+                        }).timeout(30000); 
                                 
               });
 
