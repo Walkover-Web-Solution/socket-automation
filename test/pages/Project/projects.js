@@ -277,7 +277,12 @@ class Projects extends Login{
         this.actionButtons = await this.actionButtonDiv.findElements(By.css('li'));
         return nameOfScript;
     }
-    
+    async takeScreenShotNewProject(imagePath){
+        await super.waitForContentToLoad(By.className('script_slider_large '),10000);
+        const responseElement=await this.driver.findElement(By.className('script_slider_large '));
+        const screenShot = await responseElement.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
 
     async clickOnActionButtonMenuProject(){
         const actionButtonContainer = await this.driver.findElement(By.css('[class*="actionBtnContainer"]'));

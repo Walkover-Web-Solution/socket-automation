@@ -14,12 +14,18 @@ async function testCreateProject(){
             projectsPage = new Projects();
         })
 
-        it("When we create project the it create successfully",async function(){
+        it("When we create project then it create successfully",async function(){
             await projectsPage.open(endpoints.HOME);
             await projectsPage.loginUser();
             await projectsPage.waitForEndpoint(endpoints.PROJECT , 60000);
             await projectsPage.clickOnNewProject();
             await projectsPage.createNewProject();
+            await projectsPage.takeScreenShotNewProject('newProject.png');
+            const isCaptureMode = await projectsPage.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await projectsPage.compareScreenShot('newProject.png'); 
+            const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+            expect(num).to.be.lessThan(20);
             const array = await projectsPage.getListOfProjects();
             const projectNameInput = projectsPage.projectNameInput;
             expect(array).to.include(projectNameInput);
