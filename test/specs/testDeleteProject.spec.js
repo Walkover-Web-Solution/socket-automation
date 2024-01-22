@@ -41,9 +41,9 @@ async function testDeleteProject(){
             expect(projectListDiv).to.be.empty;
         })
         
-        after(async() => {
-            await projectPage.close();
-        })
+        // after(async() => {
+        //     await projectPage.close();
+        // })
     })
 }
 

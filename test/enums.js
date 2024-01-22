@@ -32,7 +32,9 @@ const apiIndex = {
 const actions = {
     PAUSE : 0,
     RENAME : 1,
-    DELETE  : 2
+    DUPLICATE  : 2,
+    MOVE : 3,
+    DELETE :4
 }
 
 module.exports = {endpoints , stepIndex , apiIndex , actions};

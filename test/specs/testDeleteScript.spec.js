@@ -3,13 +3,13 @@ const {endpoints} = require('../enums');
 const {expect} = require('chai');
 
 
-async function compareSS(projectPage , imagePath){
-    const comparisonResult = await projectPage.compareScreenShot(imagePath);
-    const isCaptureMode = await projectPage.isCaptureMode;
-    if(isCaptureMode) return;
-    const misMatch = Math.floor(comparisonResult.rawMisMatchPercentage);
-    return misMatch;
-}
+// async function compareSS(projectPage , imagePath){
+//     const comparisonResult = await projectPage.compareScreenShot(imagePath);
+//     const isCaptureMode = await projectPage.isCaptureMode;
+//     if(isCaptureMode) return;
+//     const misMatch = Math.floor(comparisonResult.rawMisMatchPercentage);
+//     return misMatch;
+// }
 
 async function testDeleteScript(){
     describe('test delete script' , async() => {
@@ -40,9 +40,9 @@ async function testDeleteScript(){
             expect(listOfNamesOfDeletedScript).to.include(nameOfDeletedScript);
         })
         
-        after(async() => {
-            await projectPage.close();
-        })
+        // after(async() => {
+        //     await projectPage.close();
+        // })
     })
 }
 

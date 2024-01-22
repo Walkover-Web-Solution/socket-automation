@@ -3,9 +3,9 @@ const dotenv = require('dotenv');
 dotenv.config();
 // const testCreateOrg = require('./test/specs/testCreateOrg.spec');
 // const testCreateProject = require('./test/specs/testCreateProject.spec');
-const testCreateScript = require('./test/specs/testCreateScript.spec');
+// const testCreateScript = require('./test/specs/testCreateScript.spec');
 // const testPauseScript = require('./test/specs/testPauseScript.spec');
-// const testDeleteScript = require('./test/specs/testDeleteScript.spec');
+const testDeleteScript = require('./test/specs/testDeleteScript.spec');
 // const testPauseProject = require('./test/specs/testPauseProject.spec');
 // const testDeleteProject = require('./test/specs/testDeleteProject.spec');
 // const testInvocation = require('./test/specs/testInvocation_prod.spec');
@@ -31,8 +31,8 @@ const testCreateScript = require('./test/specs/testCreateScript.spec');
 async function test(){
     // await testCreateOrg();
     // await testCreateProject();
-    await testCreateScript();
-    // await testDeleteScript();
+    // await testCreateScript();
+    await testDeleteScript();
     // await testVariableStep();
     // await testGetStep();
     // await testFunction();
@@ -43,5 +43,6 @@ async function test(){
     // await testPauseScript();
     // await testPauseProject();
     // await Comment();
+    // await testDeleteProject();
 }
 test();
