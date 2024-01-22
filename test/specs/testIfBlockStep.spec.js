@@ -32,6 +32,12 @@ async function testIfBlockStep(){
             await ifStep.createConditionIf("true");
             const text_name=await ifStep.responseOfIfBlockIf();
             expect(text_name).to.include("true");
+            await ifStep.takeScreenShotIfBlock('ifTrue.png');
+            const isCaptureMode = await ifStep.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await ifStep.compareScreenShot('ifTrue.png'); 
+            const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+            expect(num).to.be.lessThan(20);
             await ifStep.crossIfBlock();
             // await ifStep.deleteIfBlock();
         }).timeout(700000);
@@ -45,6 +51,13 @@ async function testIfBlockStep(){
             await ifStep.createConditionIf("false");
             const text_name=await ifStep.responseOfIfBlockIf();
             expect(text_name).to.include("false");
+            await ifStep.takeScreenShotIfBlock('ifFalse.png');
+            const isCaptureMode = await ifStep.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await ifStep.compareScreenShot('ifFalse.png'); 
+            const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+            expect(num).to.be.lessThan(20);
+            await ifStep.crossIfBlock();
             // await ifStep.crossIfBlock();
             // await ifStep.deleteIfBlock();
         }).timeout(700000);

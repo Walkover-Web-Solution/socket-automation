@@ -350,6 +350,14 @@ class FlowPage extends Projects{
         await super.takeScreenShotAndSave(screenShot , imagePath);
     }
 
+    async takeScreenShotIfBlock(imagePath){
+        await super.waitForContentToLoad(By.className('custom_slider__halfscreen'),10000);
+        const responseElement=await this.driver.findElement(By.className('custom_slider__halfscreen'));
+        // await this.driver.executeScript('arguments[0].scrollIntoView(true)' , this.apiEditPanel);
+        const screenShot = await responseElement.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+
     async takeScreenShotWebhookSlider(imagePath){
         
         const stepNameInput = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));

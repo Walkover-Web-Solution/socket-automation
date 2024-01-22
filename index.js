@@ -21,9 +21,9 @@ dotenv.config();
 // const testPlugin = require('./test/specs/testPluginOAuthAuth.spec');
 // const {testGetStep} = require('./test/specs/testApiStep.spec');
 // const testFunction = require('./test/specs/testFunctionStep.spec');
-// const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
+const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
 // const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
-const webhookResponse = require('./test/specs/testWebhookResponse.spec');
+// const webhookResponse = require('./test/specs/testWebhookResponse.spec');
 // const Comment = require('./test/specs/testCommentStep.spec');
 
 
@@ -38,8 +38,8 @@ async function test(){
     // await testFunction();
     // await testDragAndDrop();
     // await testInvocation_dev();
-    await webhookResponse();
-    // await testIfBlockStep();
+    // await webhookResponse();
+    await testIfBlockStep();
     // await testPauseScript();
     // await testPauseProject();
     // await Comment();
