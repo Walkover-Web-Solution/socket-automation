@@ -333,6 +333,13 @@ class Projects extends Login{
         const newScriptButton = await this.driver.findElement(By.xpath('//button[text() = "Create new flow"]'));
         await newScriptButton.click();
     }
+    
+    async takeScreenShotCreateScript(imagePath){
+        await super.waitForContentToLoad(By.className("w-100 h-100 flex bg-white MuiBox-root css-0"),10000);
+        const stepNameInput = await this.driver.findElement(By.className("w-100 h-100 flex bg-white MuiBox-root css-0"));
+        const screenShot = await stepNameInput.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+        }
 
     //deprecated function
     async createNewScript(scriptName){

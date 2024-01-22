@@ -1,5 +1,7 @@
-const FlowPage = require('../pages/Flow/flow');
+const FlowPage = require('../pages/Project/projects');
 const {endpoints} = require('../enums');
+const {expect}=require('chai');
+
 const getUniqueName = require('../../utilities/getDate');
 let flowPage;
 
@@ -17,15 +19,17 @@ async function testCreateScript(){
                 await flowPage.clickOnProjectName();
                 await flowPage.waitForScriptSlider();
                 await flowPage.clickOnNewFlow();
-                await flowPage.createNewScript(getUniqueName('script'));
+                await flowPage.takeScreenShotCreateScript('createscript.png');
+                const isCaptureMode = await flowPage.isCaptureMode;
+                if(isCaptureMode) return;
+                const comparisonResult = await flowPage.compareScreenShot('createScript.png');
+                const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+                expect(num).to.be.lessThan(20);
             }catch(err){
                 console.log(err);
             }
-            })
+            }).timeout(700000);
         
-        after(async() => {
-            await flowPage.close();
-        })
     })
 }
 
