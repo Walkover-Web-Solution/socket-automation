@@ -293,18 +293,31 @@ class Projects extends Login{
     }
     
     async pauseProject(){
-        await this.actionButtons[actions.PAUSE].click();
+        await this.actionButtons[actionsOfPro.PAUSE].click();
         await this.driver.sleep(2000);
     }
     
-    async deleteProject(){
-        await this.actionButtons[actions.DELETE].click();
+    async deleteProject() {
+        if (!this.actionButtons || !this.actionButtons[actionsOfPro.DELETE]) {
+            console.error("Action button for delete not found.");
+            return;
+        }
+        await this.actionButtons[actionsOfPro.DELETE].click();
         await this.driver.sleep(2000);
     }
+
+     async clickeDleteProject(){
+     await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+     const deleteBtn = await this.driver.findElement(By.className('MuiMenu-list'));
+     const clickDeleteBtn= await deleteBtn.findElement(By.xpath('//li[text() = "Delete"]'));
+     clickDeleteBtn.click();
+
+    }
+    
     
     async renameProject(new_name){
         await this.intitaliseActionButtonsForProject();
-        await this.actionButtons[actions.RENAME].click();
+        await this.actionButtons[actionsOfPro.RENAME].click();
         const activeElement = await this.driver.executeScript('return document.activeElement');
         await this.driver.executeScript('arguments[0].select()', activeElement);
         await this.driver.actions().sendKeys(Key.BACK_SPACE).perform();
@@ -351,16 +364,18 @@ class Projects extends Login{
         await this.driver.sleep(5000);
     }
 
-    async hoverOnMenuButton(){
-        const actionButtonContainer = await this.driver.findElements(By.id('long-button'));
-        await this.driver.actions().move({origin : actionButtonContainer[1]}).pause(1000).perform();
-        return actionButtonContainer[1];
+    async ClickOnMenuButton(){
+        // const actionButtonContainer = await this.driver.findElement(By.className('actionBtnContainer'));
+        // await actionBunContainer.click();tto
+        await super.waitForContentToLoad(By.id(process.env.ACTION_BUTTONS_DIV_ID) , 10000);
+        const actionButtonDiv = await this.driver.findElement(By.id(process.env.ACTION_BUTTONS_DIV_ID));
+        actionButtonDiv.click();
     }
 
-    async takeScreenShotOfMenuButton(imagePath){
-        const actionBtnContainer = await this.hoverOnMenuButton();
-        await super.takeScreenShotAndSave(actionBtnContainer , imagePath);
-    }
+    // async takeScreenShotOfMenuButton(imagePath){
+    //     const actionBtnContainer = await this.takeScreenShotOfMenuButton();
+    //     await super.takeScreenShotAndSave(actionBtnContainer , imagePath);
+    // }
 
     async takeScreenShotActionButtons(imagePath){
         await super.takeScreenShotAndSave(this.actionButtonDiv , imagePath);
