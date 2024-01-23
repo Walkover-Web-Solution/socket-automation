@@ -20,6 +20,10 @@ async function testCreateOrg(){
             // await projectsPage.waitForProjecPageToLoad();
             await projectsPage.openListOfOrgs();
             await projectsPage.createNewOrg();
+            await projectsPage.takeScreenShotCreateOrg('createOrg.png');
+            const isCaptureMode = await projectsPage.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await projectsPage.compareScreenShot('createOrg.png'); 
             const orgNameInUI=await projectsPage.fetchOrgName();
             const orgNameInput = projectsPage.orgNameInput;
             expect(orgNameInUI).to.equal(orgNameInput);  
