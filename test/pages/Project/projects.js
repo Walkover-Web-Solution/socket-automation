@@ -283,6 +283,12 @@ class Projects extends Login{
         const screenShot = await responseElement.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot , imagePath);
     }
+    async takeScreenShotEmptyNewProject(imagePath){
+        await super.waitForContentToLoad(By.className('custom-modal'),10000);
+        const responseElement=await this.driver.findElement(By.className('custom-modal'));
+        const screenShot = await responseElement.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
 
     async clickOnActionButtonMenuProject(){
         const actionButtonContainer = await this.driver.findElement(By.css('[class*="actionBtnContainer"]'));
