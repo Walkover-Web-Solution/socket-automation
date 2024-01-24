@@ -32,7 +32,7 @@ async function testIfBlockStep(){
             await ifStep.createConditionIf("true");
             const text_name=await ifStep.responseOfIfBlockIf();
             expect(text_name).to.include("true");
-            await ifStep.takeScreenShotIfBlock('ifTrue.png');
+            await ifStep.takeScreenShotFunctionSlider('ifTrue.png');
             const isCaptureMode = await ifStep.isCaptureMode;
             if(isCaptureMode) return;
             const comparisonResult = await ifStep.compareScreenShot('ifTrue.png'); 
@@ -51,7 +51,7 @@ async function testIfBlockStep(){
             await ifStep.createConditionIf("false");
             const text_name=await ifStep.responseOfIfBlockIf();
             expect(text_name).to.include("false");
-            await ifStep.takeScreenShotIfBlock('ifFalse.png');
+            await ifStep.takeScreenShotFunctionSlider('ifFalse.png');
             const isCaptureMode = await ifStep.isCaptureMode;
             if(isCaptureMode) return;
             const comparisonResult = await ifStep.compareScreenShot('ifFalse.png'); 
