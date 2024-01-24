@@ -1,4 +1,4 @@
-const {endpoints , actions} = require('../../enums');
+const {endpoints , actions , actionsOfPro } = require('../../enums');
 const Login = require('../Login/login'); 
 const {By , until , Key, Actions} = require('selenium-webdriver');
 const getUniqueName = require('../../../utilities/getDate');
@@ -297,6 +297,7 @@ class Projects extends Login{
     }
 
     async clickOnActionButtonMenuProject(){
+        await super.waitForContentToLoad(By.css('[class*="actionBtnContainer"]'),10000);
         const actionButtonContainer = await this.driver.findElement(By.css('[class*="actionBtnContainer"]'));
         await actionButtonContainer.click();
         await super.waitForContentToLoad(By.id(process.env.ACTION_BUTTONS_DIV_ID) , 10000);
@@ -305,7 +306,15 @@ class Projects extends Login{
     }
     
     async pauseProject(){
-        await this.actionButtons[actionsOfPro.PAUSE].click();
+        // await this.actionButtons[actionsOfPro.PAUSE].click();
+        const btn= await this.driver.findElement(By.xpath('//li[text() = "Pause"]'));
+        btn.click();
+        await this.driver.sleep(2000);
+    }
+    async activeProject(){
+        // await this.actionButtons[actionsOfPro.PAUSE].click();
+        const btn= await this.driver.findElement(By.xpath('//li[text() = "Active"]'));
+        btn.click();
         await this.driver.sleep(2000);
     }
     
@@ -314,7 +323,7 @@ class Projects extends Login{
             console.error("Action button for delete not found.");
             return;
         }
-        await this.actionButtons[actionsOfPro.DELETE].click();
+        await this.actionButtons[actionsOfPro().DELETE].click();
         await this.driver.sleep(2000);
     }
 
@@ -329,7 +338,7 @@ class Projects extends Login{
     
     async renameProject(new_name){
         await this.intitaliseActionButtonsForProject();
-        await this.actionButtons[actionsOfPro.RENAME].click();
+        await this.actionButtons[actionsOfPro().RENAME].click();
         const activeElement = await this.driver.executeScript('return document.activeElement');
         await this.driver.executeScript('arguments[0].select()', activeElement);
         await this.driver.actions().sendKeys(Key.BACK_SPACE).perform();

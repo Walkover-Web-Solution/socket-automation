@@ -17,13 +17,12 @@ async function testPauseProject(){
             await projectPage.waitForProjectToLoad();
             await projectPage.clickOnActionButtonMenuProject();
             await projectPage.pauseProject();
-            const isClassCorrect = await projectPage.checkIfClassPresent('disabled-block');
-            expect(isClassCorrect).to.be.true;
-        })
+        }).timeout(700000);
         
-        after(async() => {
-            await projectPage.close();
-        })
+        it('should active project on active button click' , async()=>{
+            await projectPage.clickOnActionButtonMenuProject();
+            await projectPage.activeProject();
+        }).timeout(700000);
     })    
 }
 

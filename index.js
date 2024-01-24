@@ -1,11 +1,8 @@
 const dotenv = require('dotenv');
 
 dotenv.config();
-<<<<<<< HEAD
 // const testCreateOrg = require('./test/specs/testCreateOrg.spec');
-=======
-const testCreateOrg = require('./test/specs/testCreateOrg.spec');
->>>>>>> 3ea8e74cf92c33bbee0d2319eddeaa03f3a63a9f
+// const testCreateOrg = require('./test/specs/testCreateOrg.spec');
 // const testCreateProject = require('./test/specs/testCreateProject.spec');
 // const testCreateScript = require('./test/specs/testCreateScript.spec');
 // const testPauseScript = require('./test/specs/testPauseScript.spec');
@@ -25,19 +22,16 @@ const testCreateOrg = require('./test/specs/testCreateOrg.spec');
 // const testPlugin = require('./test/specs/testPluginOAuthAuth.spec');
 // const {testGetStep} = require('./test/specs/testApiStep.spec');
 // const testFunction = require('./test/specs/testFunctionStep.spec');
-const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
+// const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
 // const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
 // const webhookResponse = require('./test/specs/testWebhookResponse.spec');
-// const Comment = require('./test/specs/testCommentStep.spec');
+const Comment = require('./test/specs/testCommentStep.spec');
 
 
 
 async function test(){
-<<<<<<< HEAD
     // await testCreateOrg();
-=======
-    await testCreateOrg();
->>>>>>> 3ea8e74cf92c33bbee0d2319eddeaa03f3a63a9f
+    // await testCreateOrg();
     // await testCreateProject();
     // await testCreateScript();
     // await testDeleteScript();
@@ -47,10 +41,10 @@ async function test(){
     // await testDragAndDrop();
     // await testInvocation_dev();
     // await webhookResponse();
-    await testIfBlockStep();
+    // await testIfBlockStep();
     // await testPauseScript();
     // await testPauseProject();
-    // await Comment();
+    await Comment();
     // await testDeleteProject();
 }
 test();

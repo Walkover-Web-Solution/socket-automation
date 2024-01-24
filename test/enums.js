@@ -9,7 +9,7 @@ const endpoints = {
     PLUGIN : '/plugin',
     PLUGINAUTH : '/auth',
     ACTION : '/action',
-    ACTIONOFPRO:'/actionsOfPro',
+    ACTIONOFPRO :'/actionsOfPro',
     EMBED : '/embedProjects',
     DEV_SLACK_PLUG : '/projects/orgSZWRqfwCw/projxY8B4axH/workflows/scriEz6Mbp1J/draft' 
 }
@@ -37,10 +37,11 @@ const actions = {
 }
 
 const actionsOfPro = {
-    PAUSE : 3,
+    
     RENAME : 0,
+    MOVE : 1,
     DELETE  : 2,
-    MOVE : 1
+    PAUSE : 3
 }
 
 module.exports = {endpoints , stepIndex , apiIndex , actions, actionsOfPro};
