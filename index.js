@@ -1,7 +1,11 @@
 const dotenv = require('dotenv');
 
 dotenv.config();
+<<<<<<< HEAD
 // const testCreateOrg = require('./test/specs/testCreateOrg.spec');
+=======
+const testCreateOrg = require('./test/specs/testCreateOrg.spec');
+>>>>>>> 3ea8e74cf92c33bbee0d2319eddeaa03f3a63a9f
 // const testCreateProject = require('./test/specs/testCreateProject.spec');
 // const testCreateScript = require('./test/specs/testCreateScript.spec');
 // const testPauseScript = require('./test/specs/testPauseScript.spec');
@@ -29,7 +33,11 @@ const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
 
 
 async function test(){
+<<<<<<< HEAD
     // await testCreateOrg();
+=======
+    await testCreateOrg();
+>>>>>>> 3ea8e74cf92c33bbee0d2319eddeaa03f3a63a9f
     // await testCreateProject();
     // await testCreateScript();
     // await testDeleteScript();
