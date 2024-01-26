@@ -5,6 +5,7 @@ const { exitCode } = require('process');
 const { CONNREFUSED } = require('dns');
 const { waitForDebugger } = require('inspector');
 
+
 const comment= new Comment();
 
 async function testComment(){
@@ -22,17 +23,23 @@ async function testComment(){
                     await comment.clickOnAddSteps();
                     await comment.getAllStepsUsedFlow();
                     await comment.clickOnStep(stepIndex.COMMENT);
+                    await comment.takeScreenShotOfComment('commentClicked.png');
+                    const isCaptureMode = await comment.isCaptureMode;
+                    if(isCaptureMode) return;
+                    const comparisonResult = await comment.compareScreenShot('commentClicked.png'); 
+                    const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+                    expect(num).to.be.lessThan(20);
                         }).timeout(30000); 
 
-                // it('Case:02 write comment',async function(){
-                //     //case:02 write comment-new
-                //     await comment.writeComment("Newcomment");
-                // }).timeout(30000);
+                it('Case:02 write comment',async function(){
+                    //case:02 write comment-new
+                    await comment.writeComment("Newcomment");
+                }).timeout(30000);
 
-                // it('Case:03 write comment-spaces only',async function(){
-                //     //case:03 write comment-spaces
-                //     await comment.writeComment("     ");
-                // }).timeout(30000);
+                it('Case:03 write comment-spaces only',async function(){
+                    //case:03 write comment-spaces
+                    await comment.writeComment("     ");
+                }).timeout(30000);
 
                 // it('Case:03 Backspace comment-Remove comment from the flow',async function(){
                 //     //case:04 Remove comment

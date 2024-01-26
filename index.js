@@ -2,7 +2,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 // const testCreateOrg = require('./test/specs/testCreateOrg.spec');
-// const testCreateOrg = require('./test/specs/testCreateOrg.spec');
 // const testCreateProject = require('./test/specs/testCreateProject.spec');
 // const testCreateScript = require('./test/specs/testCreateScript.spec');
 // const testPauseScript = require('./test/specs/testPauseScript.spec');
@@ -30,7 +29,6 @@ const Comment = require('./test/specs/testCommentStep.spec');
 
 
 async function test(){
-    // await testCreateOrg();
     // await testCreateOrg();
     // await testCreateProject();
     // await testCreateScript();

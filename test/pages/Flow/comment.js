@@ -1,9 +1,10 @@
 const Projects = require('../Project/projects');
 const FlowPage = require('../Flow/flow.js');
 const {endpoints} = require('../../enums');
-const {By,until,Key} = require('selenium-webdriver');
+const {By,until,Keys,Key} = require('selenium-webdriver');
 const getButtonHavingText = require('../../../utilities/getButtonHavingText');
 const fs = require('fs');
+
 
 class Comment extends FlowPage{
     constructor(){
@@ -21,21 +22,27 @@ class Comment extends FlowPage{
     }
     async writeComment(comment){
         await this.driver.sleep(2000);
-        const commnetField = await this.driver.findElement(By.xpath(`//div[@id='cmtXmkVk']//div[@class='outputcomment__commentvalue commentValue word_break-all MuiBox-root css-0']`));
-        //await commnetField.click();
-        await this.driver.actions().doubleClick(commnetField).perform();
-        await this.driver.actions().sendKeys(comment).perform();
-        await this.driver.actions().sendKeys(Key.RETURN).perform();
+        const commnetField = await this.driver.findElement(By.className("inputcomment__editcomment"));
+         commnetField.click();
+         commnetField.clear();
+         commnetField.sendKeys(comment);
+       
     }
 
     async RemoveComment(){
         await this.driver.sleep(2000);
-        const commnetField = await this.driver.findElement(By.xpath(`//div[@id='cmtXmkVk']//div[@class='outputcomment__commentvalue commentValue word_break-all MuiBox-root css-0']`));
-        //await commnetField.click();
-        await this.driver.actions().doubleClick(commnetField).perform();
-        await this.driver.actions().sendKeys(Key.BACK_SPACE).perform();
-        await this.driver.actions().sendKeys(Key.RETURN).perform();
+        const commnetField = await this.driver.findElement(By.className("inputcomment__editcomment"));
+        commnetField.sendKeys(Key.CONTROL,"a");
+        commnetField.clear();
     }
+   async takeScreenShotOfComment(imagePath){
+        await super.waitForContentToLoad(By.className("containerComment"),10000);
+        const responseElement=await this.driver.findElement(By.className('containerComment'));
+        const screenShot = await responseElement.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+
+    }
+
 }
 
 module.exports = Comment;

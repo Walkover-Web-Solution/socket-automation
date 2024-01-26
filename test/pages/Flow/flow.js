@@ -143,7 +143,7 @@ class FlowPage extends Projects{
     async clickOnStep(index){
         await this.steps[index].click();
         await super.waitForContentToLoad(By.css(`[class*=${process.env.CUSTOM_SLIDER_CLASS}]`) , 10000);
-        await this.driver.sleep(1000);
+        // await this.driver.sleep(1000);
     }
 
     async clickOnComment(index){
@@ -346,6 +346,7 @@ class FlowPage extends Projects{
         const screenShot = await responseElement.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot , imagePath);
     }
+
 
    
     async takeScreenShotWebhookSlider(imagePath){

@@ -289,6 +289,18 @@ class Projects extends Login{
         const screenShot = await responseElement.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot , imagePath);
     }
+
+
+
+    
+    async takeScreenShotOfProject(imagePath){
+        await super.waitForContentToLoad(By.className('project_list '),10000);
+        const responseElement=await this.driver.findElement(By.className('project_list'));
+        const screenShot = await responseElement.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+
+
     async takeScreenShotCreateOrg(imagePath){
         await super.waitForContentToLoad(By.xpath('//*[@id="root"]/div/div/div/div[1]/div[1]/div/div/div[2]/div[142]'),10000);
         const responseElement=await this.driver.findElement(By.xpath('//*[@id="root"]/div/div/div/div[1]/div[1]/div/div/div[2]/div[142]'));
