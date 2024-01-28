@@ -349,13 +349,19 @@ class Projects extends Login{
     
     
     async renameProject(new_name){
-        await this.intitaliseActionButtonsForProject();
-        await this.actionButtons[actionsOfPro().RENAME].click();
-        const activeElement = await this.driver.executeScript('return document.activeElement');
-        await this.driver.executeScript('arguments[0].select()', activeElement);
-        await this.driver.actions().sendKeys(Key.BACK_SPACE).perform();
-        await activeElement.sendKeys(new_name);
-        await activeElement.sendKeys(Key.ENTER);
+        await this.clickOnActionButtonMenuProject();
+        // await this.actionButtons[actionsOfPro().RENAME].click();
+        // const activeElement = await this.driver.executeScript('return document.activeElement');
+        // await this.driver.executeScript('arguments[0].select()', activeElement);
+        // await this.driver.actions().sendKeys(Key.BACK_SPACE).perform();
+        await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+        const renameBtn = await this.driver.findElement(By.className('MuiMenu-list'));
+        const clickRenameBtn= await renameBtn.findElement(By.xpath('//li[text() = "Rename"]'));
+        await clickRenameBtn.click();
+        const text= await this.driver.waitForContentToLoad(By.className("project_name cur-pointer"));
+        await text.clear();
+        await text.sendKeys(new_name);
+        await text.sendKeys(Key.ENTER);
         await this.driver.sleep(2000);
     }
 
@@ -364,12 +370,66 @@ class Projects extends Login{
     }
 
     async pauseScript(){
-        await this.actionButtons[actions.PAUSE].click();
+        // await this.actionButtons[actions.PAUSE].click();
+        await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+        const menu= await this.driver.findElement(By.className("MuiMenu-list"));
+        const pause =await menu.findElement(By.xpath('//li[text() = "Pause"]'));
+        pause.click();
         await this.driver.sleep(2000);
     }
+    async takeScreenShotPauseScript(imagePath){
+        
+        const stepNameInput = await this.driver.findElement(By.xpath('//*[@id="root"]/div/div[2]/div/div/div/div[2]/div/div[3]'));
+        const screenShot = await stepNameInput.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+
+    async takeScreenShotActiveScript(imagePath){
+        
+        const stepNameInput = await this.driver.findElement(By.xpath('//*[@id="root"]/div/div[2]/div/div/div/div[2]/div/div[2]'));
+        const screenShot = await stepNameInput.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+    async goToPauseScript(){
+        const btn= await this.driver.findElement(By.xpath('//*[@id="root"]/div/div[2]/div/div/div/div[2]/div/div[3]'));
+         const actionButtonContainer =  btn.findElement(By.css('[class*="actionBtnContainer"]'));
+         await actionButtonContainer.click();
+ 
+     }
+     async goToDeleteScript(){
+        const btn= await this.driver.findElement(By.xpath('//*[@id="root"]/div/div[2]/div/div/div/div[2]/div/div[4]'));
+         const actionButtonContainer =  btn.findElement(By.css('[class*="actionBtnContainer"]'));
+         await actionButtonContainer.click();
+ 
+     }
+
+    async takeScreenShotDeleteScript(imagePath){
+        
+        const stepNameInput = await this.driver.findElement(By.xpath('//*[@id="root"]/div/div[2]/div/div/div/div[2]/div/div[4]'));
+        const screenShot = await stepNameInput.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+
+
+   
+
     
+
+    async activeScript(){
+        // await this.actionButtons[actions.DELETE].click();
+        await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+        const menu= await this.driver.findElement(By.className("MuiMenu-list"));
+        const deleteBtn =await menu.findElement(By.xpath('//li[text() = "Active"]'));
+        deleteBtn.click();
+        await this.driver.sleep(2000);
+    }
+
     async deleteScript(){
-        await this.actionButtons[actions.DELETE].click();
+        // await this.actionButtons[actions.DELETE].click();
+        await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+        const menu= await this.driver.findElement(By.className("MuiMenu-list"));
+        const deleteBtn =await menu.findElement(By.xpath('//li[text() = "Delete"]'));
+        deleteBtn.click();
         await this.driver.sleep(2000);
     }
 

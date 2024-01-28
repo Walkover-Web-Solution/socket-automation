@@ -22,16 +22,30 @@ async function testPauseScript(){
             await projectPage.pauseScript();
             const nameOfScripts = await projectPage.getListOfScripts();
             expect(nameOfScripts).to.not.include(nameOfPausedScript);
-        })
+            await projectPage.takeScreenShotPauseScript('pause.png');
+            const isCaptureMode = await projectPage.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await projectPage.compareScreenShot('pause.png'); 
+            const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+            expect(num).to.be.lessThan(20);
+        }).timeout(30000); 
         
         it('should send script in paused script section in script slider' , async() => {
             const nameOfPausedScripts = await projectPage.getListOfPausedScripts();
             expect(nameOfPausedScripts).to.include(nameOfPausedScript);
-        })
-        
-        after(async() => {
-            await projectPage.close();
-        })
+        }).timeout(30000); 
+
+        it('Again active script' , async() => {
+            await projectPage.goToPauseScript();
+            await projectPage.activeScript();
+            await projectPage.takeScreenShotActiveScript('active.png');
+            const isCaptureMode = await projectPage.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await projectPage.compareScreenShot('active.png'); 
+            const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+            expect(num).to.be.lessThan(20);
+        }).timeout(30000); 
+       
     })
 }
 

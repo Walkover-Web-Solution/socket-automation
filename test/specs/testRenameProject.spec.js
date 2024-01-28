@@ -9,7 +9,7 @@ async function testRenameProject(){
     describe("Create rename project test cases",async function(){
         it("Project renamed successfully !",async ()=>{
             await projectsPage.open(endpoints.HOME);
-            await projectsPage.clickOnLoginWithGoogle();
+            await projectsPage.loginUser();
             await projectsPage.waitForEndpoint(endpoints.PROJECT , 60000);
             await projectsPage.renameProject("rename1234");
             const array=await projectsPage.getAllProjectsText();

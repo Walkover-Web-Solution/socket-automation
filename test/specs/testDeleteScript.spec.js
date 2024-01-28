@@ -3,14 +3,6 @@ const {endpoints} = require('../enums');
 const {expect} = require('chai');
 
 
-// async function compareSS(projectPage , imagePath){
-//     const comparisonResult = await projectPage.compareScreenShot(imagePath);
-//     const isCaptureMode = await projectPage.isCaptureMode;
-//     if(isCaptureMode) return;
-//     const misMatch = Math.floor(comparisonResult.rawMisMatchPercentage);
-//     return misMatch;
-// }
-
 async function testDeleteScript(){
     describe('test delete script' , async() => {
         let projectPage;
@@ -29,20 +21,34 @@ async function testDeleteScript(){
             await projectPage.deleteScript();
             const scriptListDiv = await projectPage.getListOfScripts();
             expect(scriptListDiv).to.not.include(nameOfDeletedScript);
+            await projectPage.takeScreenShotDeleteScript('Delete.png');
+            const isCaptureMode = await projectPage.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await projectPage.compareScreenShot('Delete.png'); 
+            const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+            expect(num).to.be.lessThan(20);
             // await projectPage.takeScreenShotOfMenuButton('menuButtonScript.png');
             // const misMatch = await compareSS(projectPage , 'menuButtonScript.png');
             // if(!misMatch) return;
             // expect(misMatch).to.be.lessThan(20);
-        })
+        }).timeout(30000); 
 
         it('List of deleted script should contain name of latest deleted script' , async() => {
             const listOfNamesOfDeletedScript = await projectPage.getListOfDeletedScripts();
             expect(listOfNamesOfDeletedScript).to.include(nameOfDeletedScript);
-        })
+        }).timeout(30000); 
+
+        it('Again active script' , async() => {
+            await projectPage.goToDeleteScript();
+            await projectPage.activeScript();
+            await projectPage.takeScreenShotActiveScript('activeDelete.png');
+            const isCaptureMode = await projectPage.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await projectPage.compareScreenShot('activeDelete.png'); 
+            const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+            expect(num).to.be.lessThan(20);
+        }).timeout(30000); 
         
-        // after(async() => {
-        //     await projectPage.close();
-        // })
     })
 }
 

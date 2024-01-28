@@ -16,7 +16,7 @@ dotenv.config();
 
 // testAskAI();
 // const testLogin = require('./test/specs/testLogin.spec');
-// const testRenameProject= require('./test/specs/testIfBlockStep.spec');
+// const testRenameProject= require('./test/specs/testRenameProject.spec');
 // const testVariableStep = require('./test/specs/testCreateVariable.spec');
 // const testPlugin = require('./test/specs/testPluginOAuthAuth.spec');
 // const {testGetStep} = require('./test/specs/testApiStep.spec');
@@ -24,7 +24,9 @@ dotenv.config();
 // const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
 // const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
 // const webhookResponse = require('./test/specs/testWebhookResponse.spec');
-const Comment = require('./test/specs/testCommentStep.spec');
+// const Comment = require('./test/specs/testCommentStep.spec');
+const deleteStep =require('./test/specs/testDeleteStep.spec')
+    
 
 
 
@@ -42,7 +44,9 @@ async function test(){
     // await testIfBlockStep();
     // await testPauseScript();
     // await testPauseProject();
-    await Comment();
+    // await Comment();
     // await testDeleteProject();
+    // await testRenameProject();
+    await deleteStep();
 }
 test();

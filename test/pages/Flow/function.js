@@ -82,6 +82,38 @@ class Function extends FlowPage{
         // await this.driver.sleep(5000);
     }
 
+    async duplicateFunction(){   
+        await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+        const menu= await this.driver.findElement(By.className("MuiMenu-list"));
+        const duplicate =await menu.findElement(By.xpath('//li[text() = "Duplicate"]'));
+        duplicate.click();
+        await this.driver.sleep(2000);
+    }
+
+    async deleteFunction(){
+        await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+        const menu= await this.driver.findElement(By.className("MuiMenu-list"));
+        const deletee =await menu.findElement(By.xpath('//li[text() = "Delete"]'));
+        deletee.click();
+        await this.driver.sleep(2000); 
+    }
+
+
+    async goToFunctionStep(){
+        await super.waitForContentToLoad(By.id("NewFun_component"),10000);
+        const acction= await this.driver.findElement(By.id("NewFun_component"));
+        const btn =acction.findElement(By.id("NewFunactionbutton"));
+        btn.click();
+    }
+
+    async goToDuplicateFunctionStep(){
+        await super.waitForContentToLoad(By.id("NewFun_Duplicate_component"),10000);
+        const acction= await this.driver.findElement(By.id("NewFun_Duplicate_component"));
+        const btn =acction.findElement(By.id("NewFun_Duplicateactionbutton"));
+        btn.click();
+    }
+
+    
     async getSuccessMessage() {
         const successMessageElement = await this.driver.findElement(By.css(''));
         await fun.waitForUIChange(); // Update the selector based on your actual success message element
