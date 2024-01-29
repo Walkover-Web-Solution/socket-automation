@@ -36,6 +36,12 @@ async function testFunction(){
                     await fun.duplicateFunction();
                     await fun.dryrun();
                     await fun.create();
+                    await fun.takeScreenShotDuplicateFunction('dupilcateFunction.png');
+                    const isCaptureMode = await fun.isCaptureMode;
+                    if(isCaptureMode) return;
+                    const comparisonResult = await fun.compareScreenShot('dupilcateFunction.png'); 
+                    const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+                    expect(num).to.be.lessThan(20);
 
                 }).timeout(30000);
 

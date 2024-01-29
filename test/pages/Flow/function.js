@@ -113,6 +113,13 @@ class Function extends FlowPage{
         btn.click();
     }
 
+    async takeScreenShotDuplicateFunction(imagePath){
+        
+        const stepNameInput = await this.driver.findElement(By.className('functionsliderbody '));
+        const screenShot = await stepNameInput.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
+
     
     async getSuccessMessage() {
         const successMessageElement = await this.driver.findElement(By.css(''));
