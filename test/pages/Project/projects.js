@@ -1,6 +1,6 @@
 const {endpoints , actions , actionsOfPro } = require('../../enums');
 const Login = require('../Login/login'); 
-const {By , until , Key, Actions} = require('selenium-webdriver');
+const {By , until , Key, Actions, Keys} = require('selenium-webdriver');
 const getUniqueName = require('../../../utilities/getDate');
 const fs = require('fs');
 // login class extends page class
@@ -214,7 +214,7 @@ class Projects extends Login{
 
     async getAllProjectsText(){
         await this.driver.sleep(2000);
-        const element=await this.driver.findElement(By.className('project_list flex-col MuiBox-root css-0'));
+        const element=await this.driver.findElement(By.className('project_list'));
         const elements=await element.findElements(By.css("div"));
         const text_array=new Set();
         for(let value of elements){
@@ -350,18 +350,21 @@ class Projects extends Login{
     
     async renameProject(new_name){
         await this.clickOnActionButtonMenuProject();
-        // await this.actionButtons[actionsOfPro().RENAME].click();
-        // const activeElement = await this.driver.executeScript('return document.activeElement');
-        // await this.driver.executeScript('arguments[0].select()', activeElement);
-        // await this.driver.actions().sendKeys(Key.BACK_SPACE).perform();
         await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
         const renameBtn = await this.driver.findElement(By.className('MuiMenu-list'));
         const clickRenameBtn= await renameBtn.findElement(By.xpath('//li[text() = "Rename"]'));
-        await clickRenameBtn.click();
-        const text= await this.driver.waitForContentToLoad(By.className("project_name cur-pointer"));
-        await text.clear();
-        await text.sendKeys(new_name);
-        await text.sendKeys(Key.ENTER);
+        clickRenameBtn.click();
+        await super.waitForContentToLoad(By.className('title-textfield'),10000);
+
+        await super.waitForContentToLoad(By.className('MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-i5z0k7'),10000);
+
+        const textField= await this.driver.findElement(By.className("MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-i5z0k7"));
+
+        await textField.sendKeys(Key.CONTROL, 'a');
+        await textField.sendKeys(Key.BACK_SPACE);
+        await textField.sendKeys(new_name);
+        await textField.sendKeys(Key.ENTER);
+    
         await this.driver.sleep(2000);
     }
 
@@ -431,6 +434,28 @@ class Projects extends Login{
         const deleteBtn =await menu.findElement(By.xpath('//li[text() = "Delete"]'));
         deleteBtn.click();
         await this.driver.sleep(2000);
+    }
+
+    async renameScript(new_name){
+        // await this.actionButtons[actions.DELETE].click();
+        await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+        const renameBtn = await this.driver.findElement(By.className('MuiMenu-list'));
+        const clickRenameBtn= await renameBtn.findElement(By.xpath('//li[text() = "Rename"]'));
+        clickRenameBtn.click();
+        await super.waitForContentToLoad(By.className('title-textfield'),10000);
+
+        await super.waitForContentToLoad(By.id('outlined-helperText'),10000);
+
+        const textField= await this.driver.findElement(By.id('outlined-helperText'));
+
+        await textField.sendKeys(Key.CONTROL, 'a');
+        await textField.sendKeys(Key.BACK_SPACE);
+        await textField.sendKeys(new_name);
+        await textField.sendKeys(Key.ENTER);
+    
+        await this.driver.sleep(2000);
+        // const pageSource = await this.driver.getPageSource();
+        // console.log('Page Source:', pageSource);
     }
 
     // this will create a new script.
@@ -542,6 +567,45 @@ class Projects extends Login{
         const projectTitleClass = await projectTitleDivParent.getAttribute('class');
         return projectTitleClass.includes(className);
     }
+
+    async clickMOveProject(){
+        await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+        const projectMenuList = await this.driver.findElement(By.className('MuiMenu-list'));
+        const ProjectMovebtn= await projectMenuList.findElement(By.xpath('//li[text() = "Move"]'));
+        ProjectMovebtn.click();
+        await this.driver.sleep(2000);
+    }
+    async nameofmovedproject(){
+        const projname = await this.driver.findElement(By.className("MuiTypography-root MuiTypography-base  line-height text-overflow-eclipse  css-dbv5r6"))
+        const orgNameww = await projname.getText();
+        // console.log("this is pro" , orgNameww)
+        return orgNameww
+    }
+    async clickMoveDropbox(){
+        await super.waitForContentToLoad(By.className("MuiPaper-root"),10000);
+        const Movedropbox = await this.driver.findElement(By.className('MuiSelect-select'));
+        Movedropbox.click();
+        const MoveOrgList = await this.driver.findElement(By.xpath('//li[contains(@class,"MuiButtonBase-root MuiMenuItem-root")][1]'))
+        await MoveOrgList.click();
+        const movebttn = await this.driver.findElement(By.className("MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"))
+        await movebttn.click();
+       
+    }
+
+        async sucess(){
+            await super.waitForContentToLoad(By.xpath('//span[text() = "PROJECTS"]') , 10000);
+            const flowTextSpanElement = await this.driver.findElement(By.className("project_list__head px-2 py-1 MuiBox-root css-0"));
+            this.listOfproj = await flowTextSpanElement.findElements(By.xpath('following-sibling::div'));
+            let nameofproject= [];
+            for(let i=0 ; i<this.listOfproj.length ; ++i){
+                const text = await this.listOfproj[i].getText();
+                nameofproject.push(text);
+            }
+            // console.log(nameofproject)
+            return nameofproject;
+        }
+
+
 }   
 
 module.exports = Projects;

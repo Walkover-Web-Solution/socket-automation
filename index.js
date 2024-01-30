@@ -12,6 +12,7 @@ dotenv.config();
 // const testDragAndDrop = require('./test/specs/testDragAndDrop.spec');
 // const testAddSteps = require('./test/specs/testAddSteps.spec');
 // const testAskAI = require('./test/specs/testAskAI.spec');
+// const testMoveProject=require('./test/specs/testMoveProject.spec')
 
 
 // testAskAI();
@@ -25,7 +26,8 @@ dotenv.config();
 // const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
 // const webhookResponse = require('./test/specs/testWebhookResponse.spec');
 // const Comment = require('./test/specs/testCommentStep.spec');
-const deleteStep =require('./test/specs/testDeleteStep.spec')
+// const deleteStep =require('./test/specs/testDeleteStep.spec')
+const testRenameScript=require('./test/specs/testRenameScript.spec')
     
 
 
@@ -47,6 +49,8 @@ async function test(){
     // await Comment();
     // await testDeleteProject();
     // await testRenameProject();
-    await deleteStep();
+    // await deleteStep();
+    // await testMoveProject();
+    await testRenameScript();
 }
 test();

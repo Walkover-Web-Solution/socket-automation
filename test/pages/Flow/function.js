@@ -1,7 +1,7 @@
 const Projects = require('../Project/projects');
 const FlowPage = require('../Flow/flow.js');
 const {endpoints} = require('../../enums');
-const {By,until,Key} = require('selenium-webdriver');
+const {By,until,Key,Keys} = require('selenium-webdriver');
 const getButtonHavingText = require('../../../utilities/getButtonHavingText');
 const fs = require('fs');
 // import org.openqa.selenium.JavascriptExecutor;
@@ -27,7 +27,7 @@ class Function extends FlowPage{
         await this.driver.sleep(2000);
         const funName = await this.driver.findElement(By.xpath(`//input[@id='function-title-textfield']`));
         await funName.click();
-        await funName.sendKeys(Key.CONTROL + "a");
+        await funName.sendKeys(Keys.CONTROL + "a");
         await funName.sendKeys(Key.DELETE);
         await funName.sendKeys(name);
     }
