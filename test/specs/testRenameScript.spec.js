@@ -2,6 +2,7 @@ const ProjectPage = require('../pages/Project/projects');
 const {endpoints , stepIndex} = require('../enums');
 const { expect } = require('chai');
 const getUniqueName=require('../../utilities/getDate');
+const uniqueValue = getUniqueName('new');
 
 
 
@@ -16,7 +17,7 @@ async function testRenameScript(){
           await projectPage.clickOnProjectName();
           await projectPage.waitForScriptSlider();
           await projectPage.clickOnActionButtonMenuOfScript();
-          await projectPage.renameScript(getUniqueName);
+          await projectPage.renameScript(uniqueValue);
        
         }).timeout(30000);
       });
