@@ -17,6 +17,8 @@ async function testDeleteScript(){
             await projectPage.waitForEndpoint(endpoints.PROJECT , 60000);
             await projectPage.clickOnProjectName();
             await projectPage.waitForScriptSlider();
+            await projectPage.clickOnNewFlow();
+            await projectPage.goBackToFlowPage();
             nameOfDeletedScript = await projectPage.clickOnActionButtonMenuOfScript();
             await projectPage.deleteScript();
             const scriptListDiv = await projectPage.getListOfScripts();

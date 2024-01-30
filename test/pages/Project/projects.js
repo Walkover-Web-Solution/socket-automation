@@ -352,6 +352,14 @@ class Projects extends Login{
      clickDeleteBtn.click();
 
     }
+
+    async goBackToFlowPage(){
+         super.driver.waitForContentToLoad(By.className('sliderbox'),10000);
+         const area=await this.driver.findElement(By.className('sliderbox'));
+         await area.findElement(By.className('column gap-4 MuiBox-root css-0'));
+        
+
+    }  
     
     
     async renameProject(new_name){
@@ -615,3 +623,7 @@ class Projects extends Login{
 }   
 
 module.exports = Projects;
+
+
+
+ 
