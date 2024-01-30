@@ -6,7 +6,7 @@ dotenv.config();
 // const testCreateScript = require('./test/specs/testCreateScript.spec');
 //  const testPauseScript = require('./test/specs/testPauseScript.spec');
 // // const testRenameScript = require('./test/specs/testRenameScript.spec');
-const testDeleteScript = require('./test/specs/testDeleteScript.spec');
+// const testDeleteScript = require('./test/specs/testDeleteScript.spec');
 // const testPauseProject = require('./test/specs/testPauseProject.spec');
 // const testDeleteProject = require('./test/specs/testDeleteProject.spec');
 // // const testInvocation = require('./test/specs/testInvocation_prod.spec');
@@ -22,7 +22,7 @@ const testDeleteScript = require('./test/specs/testDeleteScript.spec');
 // const testVariableStep = require('./test/specs/testCreateVariable.spec');
 // // const testPlugin = require('./test/specs/testPluginOAuthAuth.spec');
 // const {testGetStep} = require('./test/specs/testApiStep.spec');
-// const testFunction = require('./test/specs/testFunctionStep.spec');
+const testFunction = require('./test/specs/testFunctionStep.spec');
 // const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
 // // const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
 // const webhookResponse = require('./test/specs/testWebhookResponse.spec');
@@ -37,10 +37,10 @@ async function test(){
     // await testCreateOrg();
     // await testCreateProject();
     // await testCreateScript();
-    await testDeleteScript();
+    // await testDeleteScript();
     // await testVariableStep();
     // await testGetStep();
-    // await testFunction();
+    await testFunction();
     // await testDragAndDrop();
     // await testInvocation_dev();
     // await webhookResponse();
@@ -55,14 +55,14 @@ async function test(){
     // await testRenameScript();
 }
 
+test();
 
+// async function runTests() {
+//     try {
+//         await test();
+//     } catch (error) {
+//         console.error('An error occurred:', error);
+//     }
+// }
 
-async function runTests() {
-    try {
-        await test();
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
-}
-
-runTests();
+// runTests();
