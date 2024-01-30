@@ -25,9 +25,9 @@ dotenv.config();
 // const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
 // const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
 // const webhookResponse = require('./test/specs/testWebhookResponse.spec');
-// const Comment = require('./test/specs/testCommentStep.spec');
+const Comment = require('./test/specs/testCommentStep.spec');
 // const deleteStep =require('./test/specs/testDeleteStep.spec')
-const testRenameScript=require('./test/specs/testRenameScript.spec')
+// const testRenameScript=require('./test/specs/testRenameScript.spec')
     
 
 
@@ -46,11 +46,11 @@ async function test(){
     // await testIfBlockStep();
     // await testPauseScript();
     // await testPauseProject();
-    // await Comment();
+    await Comment();
     // await testDeleteProject();
     // await testRenameProject();
     // await deleteStep();
     // await testMoveProject();
-    await testRenameScript();
+    // await testRenameScript();
 }
 test();

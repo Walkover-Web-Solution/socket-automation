@@ -32,8 +32,15 @@ class Comment extends FlowPage{
     async RemoveComment(){
         await this.driver.sleep(2000);
         const commnetField = await this.driver.findElement(By.className("inputcomment__editcomment"));
-        commnetField.sendKeys(Key.CONTROL,"a");
-        commnetField.clear();
+        commnetField.sendKeys(Key.CONTROL, "a");
+        commnetField.sendKeys(Key.BACK_SPACE);
+        commnetField.sendKeys(Key.BACK_SPACE);
+        commnetField.sendKeys(Key.BACK_SPACE);
+        commnetField.sendKeys(Key.BACK_SPACE);
+        commnetField.sendKeys(Key.BACK_SPACE);
+
+
+
     }
    async takeScreenShotOfComment(imagePath){
         await super.waitForContentToLoad(By.className("containerComment"),10000);
