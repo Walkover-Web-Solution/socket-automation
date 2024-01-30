@@ -582,43 +582,63 @@ class Projects extends Login{
         return projectTitleClass.includes(className);
     }
 
-    async clickMOveProject(){
+    async actionbtn(){
+        await super.waitForContentToLoad(By.className("flowlist") ,100000);
+        const actionbtnclick= await this.driver.findElement(By.xpath(`//div[contains(@class , 'flowlist')]//div[contains(@class , 'actionBtnContainer')]`));
+        actionbtnclick.click();
+    }
+    async dropdown_org_proj(orgindex , projindex){
+        await super.waitForContentToLoad(By.className("select-dropdown"),10000);
+        const dropdownclick = await this.driver.findElements(By.className('select-dropdown'));
+        dropdownclick[0].click();
+        await super.waitForContentToLoad(By.className("MuiList-root"),1000);
+        const droporgselect = await this.driver.findElements(By.className("MuiButtonBase-root MuiMenuItem-root"))
+        droporgselect[orgindex].click();
+        await super.waitForContentToLoad(By.className("select-dropdown"),10000);
+        dropdownclick[1].click();
+        await super.waitForContentToLoad(By.className("MuiList-root"),1000);
+        const dropprojselect = await this.driver.findElements(By.className("MuiButtonBase-root MuiMenuItem-root"));
+        dropprojselect[projindex].click();
+
+    }
+    async flowinput (flow_title){
+        const flowtitle = await this.driver.findElement(By.className("css-kpqcsh"))
+        const inputflow = await flowtitle.findElement(By.css("input"))
+        await inputflow.sendKeys(flow_title || this.currentScriptName, Key.RETURN); 
+
+    }
+    async move_dup_btn_click(){
+        const duplicatebtn = await this.driver.findElement(By.className("MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"))
+        await duplicatebtn.click();
+    }
+
+    async clickMovescript(){
         await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
-        const projectMenuList = await this.driver.findElement(By.className('MuiMenu-list'));
-        const ProjectMovebtn= await projectMenuList.findElement(By.xpath('//li[text() = "Move"]'));
-        ProjectMovebtn.click();
-        await this.driver.sleep(2000);
+        const movescript = await this.driver.findElement(By.className('MuiMenu-list'));
+        const scrmovebtn= await movescript.findElement(By.xpath('//li[text() = "Move"]'));
+        scrmovebtn.click();
     }
-    async nameofmovedproject(){
-        const projname = await this.driver.findElement(By.className("MuiTypography-root MuiTypography-base  line-height text-overflow-eclipse  css-dbv5r6"))
-        const orgNameww = await projname.getText();
-        // console.log("this is pro" , orgNameww)
-        return orgNameww
-    }
-    async clickMoveDropbox(){
-        await super.waitForContentToLoad(By.className("MuiPaper-root"),10000);
-        const Movedropbox = await this.driver.findElement(By.className('MuiSelect-select'));
-        Movedropbox.click();
-        const MoveOrgList = await this.driver.findElement(By.xpath('//li[contains(@class,"MuiButtonBase-root MuiMenuItem-root")][1]'))
-        await MoveOrgList.click();
-        const movebttn = await this.driver.findElement(By.className("MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"))
-        await movebttn.click();
-       
-    }
-
+    
         async sucess(){
-            await super.waitForContentToLoad(By.xpath('//span[text() = "PROJECTS"]') , 10000);
-            const flowTextSpanElement = await this.driver.findElement(By.className("project_list__head px-2 py-1 MuiBox-root css-0"));
-            this.listOfproj = await flowTextSpanElement.findElements(By.xpath('following-sibling::div'));
-            let nameofproject= [];
-            for(let i=0 ; i<this.listOfproj.length ; ++i){
-                const text = await this.listOfproj[i].getText();
-                nameofproject.push(text);
-            }
-            // console.log(nameofproject)
-            return nameofproject;
+            await this.driver.sleep(2000)
+            await super.waitForContentToLoad(By.className("text-overflow-eclipse  css-1fs366i"));
+            this.nameofscr = await this.driver.findElements(By.className("text-overflow-eclipse  css-1fs366i"));
+            const nameofmovescript = await this.nameofscr[0].getText();
+            return nameofmovescript
+            
         }
-
+    
+    
+        async clickduplicatescr(){
+            // await super.waitForContentToLoad(By.className("flowslider"),10000);
+            // const scriptmenulist = await this.driver.findElement(By.className('MuiMenu-list'));
+            // scriptmenulist.click();
+            
+            await super.waitForContentToLoad(By.className("MuiMenu-list"),10000);
+            const movescript = await this.driver.findElement(By.className('MuiMenu-list'));
+            const scrmovebtn= await movescript.findElement(By.xpath('//li[text() = "Duplicate"]'));
+            scrmovebtn.click();
+        }
 
 }   
 
