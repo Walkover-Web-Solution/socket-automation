@@ -251,8 +251,8 @@ class FlowPage extends Projects{
     async closeSlider(){
         await super.waitForContentToLoad(By.css('[class*="custom_slider__halfscreen"]') , 10000);
         const masterSlider = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        await super.waitForContentToBeVisible(masterSlider , 10000);
         const buttonsInSlider = await masterSlider.findElements(By.css('button'));
-        await super.waitForContentToBeVisible(buttonsInSlider[1] , 10000);
         await buttonsInSlider[1].click();
     }
 

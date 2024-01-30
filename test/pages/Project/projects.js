@@ -307,7 +307,13 @@ class Projects extends Login{
         const screenShot = await responseElement.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot , imagePath);
     }
-
+     
+    async takeScreenShotpauseScript(imagePath){
+        await super.waitForContentToLoad(By.xpath('//*[@id="long-menu"]/div[3]/ul'),10000);
+        const responseElement=await this.driver.findElement(By.xpath('//*[@id="long-menu"]/div[3]/ul'));
+        const screenShot = await responseElement.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot , imagePath);
+    }
     async clickOnActionButtonMenuProject(){
         await super.waitForContentToLoad(By.css('[class*="actionBtnContainer"]'),10000);
         const actionButtonContainer = await this.driver.findElement(By.css('[class*="actionBtnContainer"]'));

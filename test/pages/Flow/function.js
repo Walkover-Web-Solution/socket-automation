@@ -27,7 +27,7 @@ class Function extends FlowPage{
         await this.driver.sleep(2000);
         const funName = await this.driver.findElement(By.xpath(`//input[@id='function-title-textfield']`));
         await funName.click();
-        await funName.sendKeys(Keys.CONTROL + "a");
+        await funName.sendKeys(Key.CONTROL + "a");
         await funName.sendKeys(Key.DELETE);
         await funName.sendKeys(name);
     }
