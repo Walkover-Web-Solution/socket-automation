@@ -53,9 +53,8 @@ class FlowPage extends Projects{
                 // await super.waitForContentToLoad(By.id("#addStepsMainContainer"), 10000);
                 // const updatedOrder = await this.getElementsOrder(dragElement);
                 // expect(updatedOrder).to.not.deep.equal(initialOrder);
-            } else {
-                console.log("No element to drag");
-            }
+            return "Drag and drop successful";
+            } 
             
         } catch (error) {
             console.error('Error', error);
@@ -253,6 +252,14 @@ class FlowPage extends Projects{
         await super.waitForContentToBeVisible(masterSlider , 10000);
         const buttonsInSlider = await masterSlider.findElements(By.css('button'));
         await buttonsInSlider[1].click();
+    }
+
+    async closeSliderFun(){
+        await super.waitForContentToLoad(By.css('[class*="custom_slider__halfscreen"]') , 10000);
+        const masterSlider = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        await super.waitForContentToBeVisible(masterSlider , 10000);
+        const buttonsInSlider = await masterSlider.findElements(By.css('button'));
+        await buttonsInSlider[2].click();
     }
 
     async clickOnVariableSliderAccordion(){

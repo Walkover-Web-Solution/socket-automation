@@ -30,6 +30,10 @@ async function testCreateScript(){
             }
             }).timeout(700000);
 
+            after(async() => {
+                flowPage.close();
+               })
+
     })
 }
 

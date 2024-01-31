@@ -18,8 +18,12 @@ async function testDeleteScript(){
             await projectPage.clickOnProjectName();
             await projectPage.waitForScriptSlider();
             await projectPage.clickOnNewFlow();
+            await projectPage.closeSlider();
             await projectPage.goBackToFlowPage();
-            nameOfDeletedScript = await projectPage.clickOnActionButtonMenuOfScript();
+            await projectPage.clickOnActionButtonMenuOfScript();
+            await projectPage.pauseScript();
+            await projectPage.goBackToFlowPage();
+            nameOfDeletedScript=await projectPage.clickOnActionButtonMenuOfScript();
             await projectPage.deleteScript();
             const scriptListDiv = await projectPage.getListOfScripts();
             expect(scriptListDiv).to.not.include(nameOfDeletedScript);
@@ -29,10 +33,10 @@ async function testDeleteScript(){
             const comparisonResult = await projectPage.compareScreenShot('Delete.png'); 
             const num = Math.floor(comparisonResult.rawMisMatchPercentage);
             expect(num).to.be.lessThan(20);
-            // await projectPage.takeScreenShotOfMenuButton('menuButtonScript.png');
-            // const misMatch = await compareSS(projectPage , 'menuButtonScript.png');
-            // if(!misMatch) return;
-            // expect(misMatch).to.be.lessThan(20);
+            await projectPage.takeScreenShotOfMenuButton('menuButtonScript.png');
+            const misMatch = await compareSS(projectPage , 'menuButtonScript.png');
+            if(!misMatch) return;
+            expect(misMatch).to.be.lessThan(20);
         }).timeout(30000); 
 
         it('List of deleted script should contain name of latest deleted script' , async() => {
@@ -50,6 +54,10 @@ async function testDeleteScript(){
             const num = Math.floor(comparisonResult.rawMisMatchPercentage);
             expect(num).to.be.lessThan(20);
         }).timeout(30000); 
+
+        after(async() => {
+            projectPage.close();
+           })
         
     })
 }

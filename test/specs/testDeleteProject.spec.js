@@ -45,7 +45,7 @@ async function testDeleteProject(){
         })
         
         after(async() => {
-            // await projectPage.close();
+            await projectPage.close();
         })
     })
 }

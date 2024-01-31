@@ -20,6 +20,10 @@ async function testRenameScript(){
           await projectPage.renameScript(uniqueValue);
        
         }).timeout(30000);
+        after(async() => {
+          projectPage.close();
+         })
+        
       });
 }
 module.exports = testRenameScript;

@@ -354,12 +354,19 @@ class Projects extends Login{
     }
 
     async goBackToFlowPage(){
-         super.driver.waitForContentToLoad(By.className('sliderbox'),10000);
-         const area=await this.driver.findElement(By.className('sliderbox'));
-         await area.findElement(By.className('column gap-4 MuiBox-root css-0'));
+        //  super.driver.waitForContentToLoad(By.className('slider__maincotainer '),10000);
+         await this.driver.findElement(By.className('slider__maincotainer '));
+        //  await area.findElement(By.className('column gap-4 MuiBox-root css-0'));
         
-
     }  
+
+    async closeSlider(){
+        await super.waitForContentToLoad(By.css('[class*="custom_slider__halfscreen"]') , 10000);
+        const masterSlider = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        await super.waitForContentToBeVisible(masterSlider , 10000);
+        const buttonsInSlider = await masterSlider.findElements(By.css('button'));
+        await buttonsInSlider[1].click();
+    }
     
     
     async renameProject(new_name){

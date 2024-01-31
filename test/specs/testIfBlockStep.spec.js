@@ -55,12 +55,17 @@ async function testIfBlockStep(){
             const isCaptureMode = await ifStep.isCaptureMode;
             if(isCaptureMode) return;
             const comparisonResult = await ifStep.compareScreenShot('ifFalse.png'); 
+           
             const num = Math.floor(comparisonResult.rawMisMatchPercentage);
             expect(num).to.be.lessThan(20);
             await ifStep.crossIfBlock();
             // await ifStep.crossIfBlock();
             // await ifStep.deleteIfBlock();
         }).timeout(700000);
+
+        after(async() => {
+            ifStep.close();
+           })
     });
 };
 

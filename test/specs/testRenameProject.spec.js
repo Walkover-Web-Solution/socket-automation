@@ -3,6 +3,7 @@ const {endpoints} = require('../enums');
 const {expect}=require('chai');
 const {assert}=require('mocha');
 const getUniqueName=require('../../utilities/getDate')
+const uniqueValue = getUniqueName('new');
 
 const projectsPage= new Projects();
 
@@ -12,9 +13,9 @@ async function testRenameProject(){
             await projectsPage.open(endpoints.HOME);
             await projectsPage.loginUser();
             await projectsPage.waitForEndpoint(endpoints.PROJECT , 60000);
-            await projectsPage.renameProject(getUniqueName);
+            await projectsPage.renameProject(uniqueValue);
             const array=await projectsPage.getAllProjectsText();
-            expect(array).to.include(getUniqueName)
+            expect(array).to.include(uniqueValue)
         }).timeout(70000);
         
 
@@ -35,6 +36,9 @@ async function testRenameProject(){
             await projectsPage.refreshPage();
             await projectsPage.waitForEndpoint(endpoints.PROJECT , 700000);
         }).timeout(70000);
+        after(async() => {
+            projectsPage.close();
+           })
 })
 }
 

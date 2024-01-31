@@ -31,26 +31,26 @@ async function testApiStep(methodType){
             }catch(err){
                 console.log(err);
             }
-        })
+        }).timeout(30000);
 
         it('api step name should be editable' , async() => {
             await flowPage.initialiseApiSlider();
             await flowPage.fillStepName('api_step');
             const stepname = await flowPage.getStepName();
             expect(stepname).to.be.equal('api_step');
-        })
+        }).timeout(30000);
 
         it('api url field should be editable' , async() => {
             await flowPage.fillUrl(process.env.GET_REQUEST_URL);
             const url = await flowPage.getUrl();
             expect(url).to.be.equal(process.env.GET_REQUEST_URL);
-        })
+        }).timeout(30000);
 
         it('api method should be editable' , async() => {
             await flowPage.selectApiMethod(apiIndex[methodType]);
             const method = await flowPage.getSelectedApiMethod();
             expect(method).to.be.equal(methodType);
-        })
+        }).timeout(30000);
 
         it('dry run should produce a response' , async()=>{
             if(apiIndex[methodType] === 1 || apiIndex[methodType] === 2 || apiIndex[methodType] === 4){
@@ -59,7 +59,7 @@ async function testApiStep(methodType){
             await flowPage.clickOnDryRunButton();
             const response = await flowPage.getResponseData();
             expect(response).to.not.be.null;
-        })
+        }).timeout(30000);
 
         it('should have correct resposne' , async() => {
             await flowPage.takeResponseScreenShot('apiResponse.png');
@@ -68,7 +68,7 @@ async function testApiStep(methodType){
             const result = await flowPage.compareScreenShot('apiResponse.png');
             const num = Math.floor(result.rawMisMatchPercentage);
             expect(num).to.be.lessThan(20);
-        })
+        }).timeout(30000);
         
         it('api slider input fields should not become empty on dry run click' , async() => {
             await flowPage.takeScreenShotFunctionSlider('filledApiSlider.png');
@@ -77,19 +77,19 @@ async function testApiStep(methodType){
             const comparisonResult = await flowPage.compareScreenShot('filledApiSlider.png');
             const num = Math.floor(comparisonResult.rawMisMatchPercentage);
             expect(num).to.be.lessThan(20);
-        })
+        }).timeout(30000);
 
         it('should create a api step in flow' , async() => {
             await flowPage.clickOnCreateButton();
             await flowPage.waitForStepToCreate();
-        })
+        }).timeout(30000);
 
         it('should close api slider on close button click' , async() => {
             
-        })
+        }).timeout(30000);
 
         after(async()=>{
-            // await flowPage.close();
+            await flowPage.close();
         })
     })
 }

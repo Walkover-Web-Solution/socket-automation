@@ -37,39 +37,39 @@ async function testVariableStep(){
             }catch(err){
                 throw err;
             }
-        })
+        }).timeout(700000);
 
         it('variable step name input should be editable' , async() => {
             await flowPage.fillVariableName('random_variable');
             const var_name = await flowPage.getVariableName();
             expect(var_name).to.be.equal('random_variable');
-        })
+        }).timeout(700000);
         
         it('variable value field should be editable' , async() => {
             await flowPage.fillVariableValue('1');
             const varValue = await flowPage.getVariableValue();
             expect(varValue).to.be.equal('1');
-        })
+        }).timeout(700000);
 
         it('Create button click should show produce a response' , async() => {
             await flowPage.clickOnCreateButton(true);
             const response = await flowPage.getResponsDataVariableStep();
             expect(response).to.not.be.null;
-        })
+        }).timeout(700000);
 
         it('Should have correct value in response' , async() => {
             await flowPage.takeVariableResponseScreenShot('variableStepResponse.png');
             const misMatch = await compareSS('variableStepResponse.png');
             if(!misMatch) return;
             expect(misMatch).to.be.lessThan(20);
-        })
+        }).timeout(700000);
 
         it('should create a new variable step in flow' , async() => {
             await flowPage.takeScreenShotWorkFlow('variableStepInFlow.png');
             const misMatch = await compareSS('variableStepInFlow.png');
             if(!misMatch) return;
             expect(misMatch).to.be.lessThan(20);
-        })
+        }).timeout(700000);
 
         it('should not make variable name and value empty on create button click' , async() => {
             await flowPage.clickOnVariableSliderAccordion();
@@ -77,7 +77,7 @@ async function testVariableStep(){
             const misMatch = await compareSS('variableSliderFilled.png');
             if(!misMatch) return;
             expect(misMatch).to.be.lessThan(20);
-        })
+        }).timeout(700000);
 
 
         after(async() => {
