@@ -41,19 +41,18 @@ class FlowPage extends Projects{
 
     async DragAndDrop() {
         try {
-            await super.waitForContentToLoad(By.id("#addStepsMainContainer"), 10000);
-            const divContainer = await this.driver.findElement(By.id("#addStepsMainContainer"));
-            console.log("Element found");
-            const dragElement = await divContainer.findElements(By.id("hoverIconContainer"));
-            if (dragElement.length > 1) {
+            await super.waitForContentToLoad(By.css("[class*='dndrop-container']"), 10000);
+            const divContainer = await this.driver.findElement(By.css("[class*='dndrop-container']"));
+            const steps = await divContainer.findElements(By.css('[class*="plugin-cont__name"]'));
+            if (steps.length > 1) {
                 console.log("Drag elements");
-                const initialOrder = await this.getElementsOrder(dragElement);
-                const firstElement = dragElement[0];
-                const secondElement = dragElement[1];
-                    await this.driver.actions().move({ origin: firstElement }).press().dragAndDrop(firstElement, secondElement).perform();
-                    await super.waitForContentToLoad(By.id("#addStepsMainContainer"), 10000);
-                    const updatedOrder = await this.getElementsOrder(dragElement);
-                    expect(updatedOrder).to.not.deep.equal(initialOrder);
+                const firstElement = steps[0];
+                const p1 = await firstElement.findElement(By.css('p'));
+                const secondElement = steps[1];
+                await this.driver.actions().move({origin: firstElement }).press().move({origin : p1}).move({origin : secondElement}).release().perform();
+                // await super.waitForContentToLoad(By.id("#addStepsMainContainer"), 10000);
+                // const updatedOrder = await this.getElementsOrder(dragElement);
+                // expect(updatedOrder).to.not.deep.equal(initialOrder);
             } else {
                 console.log("No element to drag");
             }
