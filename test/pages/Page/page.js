@@ -9,7 +9,10 @@ module.exports = class Page {
         try{
             // let service = new chrome.ServiceBuilder('C:\\Users\\91702\\Downloads\\chromedriver-win64').build();
             // chrome.setDefaultService(service);
-            let options = new chrome.Options();
+
+            let options = new chrome.Options().headless(); // for headless mode uncomment this and comment the next line
+            // let options = new chrome.Options();
+
             // console.log(process.argv);
             
             this.driver = new Builder().setChromeOptions(options).forBrowser('chrome').build();
