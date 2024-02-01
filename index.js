@@ -32,7 +32,8 @@ const {testGetStep} = require('./test/specs/testApiStep.spec');
 // // const testRenameScript=require('./test/specs/testRenameScript.spec')
 // const moveScript=require('./test/specs/testMoveScript.spec');
 // const duplicateScript=require('./test/specs/testDuplicateScript.spec')
-    
+const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
+// const testLiveFlow = require('./test/specs/testLiveFlow.spec');
 
 
 
@@ -42,7 +43,7 @@ async function test(){
 //     await testCreateScript();
 //     await testDeleteScript();
 //    await testVariableStep();
-    await testGetStep();
+    // await testGetStep();
 //     await testFunction();
 //     await testDragAndDrop();
 //     await testInvocation();
@@ -58,6 +59,8 @@ async function test(){
 //     await testRenameScript();
 //     await moveScript();
 //     await duplicateScript();
+    await testSheetPlugin();
+    // await testLiveFlow();
 }
 
 // test();
