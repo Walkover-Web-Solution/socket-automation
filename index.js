@@ -15,6 +15,8 @@ dotenv.config();
 // // const testAddSteps = require('./test/specs/testAddSteps.spec');
 // // const testAskAI = require('./test/specs/testAskAI.spec');
 // // const testMoveProject=require('./test/specs/testMoveProject.spec')
+const testpluginSlack = require('./test/specs/testpluginSlack.spec')
+// const testdiscardflow = require('./test/specs/testdiscardflow.spec')
 
 
 // // // testAskAI();
@@ -22,7 +24,7 @@ dotenv.config();
 // const testRenameProject= require('./test/specs/testRenameProject.spec');
 // const testVariableStep = require('./test/specs/testCreateVariable.spec');
 // // // const testPlugin = require('./test/specs/testPluginOAuthAuth.spec');
-const {testGetStep} = require('./test/specs/testApiStep.spec');
+// const {testGetStep} = require('./test/specs/testApiStep.spec');
 // const testFunction = require('./test/specs/testFunctionStep.spec');
 // const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
 // // const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
@@ -32,14 +34,14 @@ const {testGetStep} = require('./test/specs/testApiStep.spec');
 // // const testRenameScript=require('./test/specs/testRenameScript.spec')
 // const moveScript=require('./test/specs/testMoveScript.spec');
 // const duplicateScript=require('./test/specs/testDuplicateScript.spec')
-const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
+// const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
 // const testLiveFlow = require('./test/specs/testLiveFlow.spec');
 
 
 
 async function test(){
 //     await testCreateOrg();
-//     await testCreateProject();
+    // await testCreateProject();
 //     await testCreateScript();
 //     await testDeleteScript();
 //    await testVariableStep();
@@ -59,8 +61,10 @@ async function test(){
 //     await testRenameScript();
 //     await moveScript();
 //     await duplicateScript();
-    await testSheetPlugin();
+    // await testSheetPlugin();
     // await testLiveFlow();
+    await testpluginSlack(); 
+    // await testdiscardflow();
 }
 
 // test();
