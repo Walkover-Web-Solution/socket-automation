@@ -225,6 +225,22 @@ class Projects extends Login{
         console.log(text_array);
         return text_array;
     }
+
+    async getAllScriptText(){
+        await this.driver.sleep(2000);
+        const element=await this.driver.findElement(By.className(' column gap-4 MuiBox-root css-0'));
+        const elements=await element.findElements(By.css("div"));
+        const text_array=new Set();
+        for(let value of elements){
+            const text=await value.getText();
+            text_array.add(text);
+        }
+        text_array.delete('');
+        console.log(text_array);
+        return text_array;
+    }
+
+   
     
     async waitForProjectToLoad(){
         await this.driver.wait(until.elementLocated(By.css(`[class*=${process.env.PROJECT_NAME_CLASS}]`) , 10000));
