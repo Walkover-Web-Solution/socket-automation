@@ -11,7 +11,7 @@ class Slack extends FlowPage{
     }
     async clickOnSlack() {
         try {
-            const slackButton = await this.driver.wait(until.elementLocated(By.xpath('//*[@id=":rc:-option-8"]/button')), 5000);
+            const slackButton = await this.driver.wait(until.elementLocated(By.id(':rc:-option-8')), 5000);
             await slackButton.click();
         } catch (error) {
             console.error('Error clicking on Slack button:', error);
@@ -20,46 +20,79 @@ class Slack extends FlowPage{
     }
 
     async ClickOnSlackMessage(){
-        const SlackMessage= await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div/nav/div[1]/div/p[1]')),5000);
+        const SlackMessage= await this.driver.wait(until.elementLocated(By.className('list p-1  cursor-pointer')),5000);
         await SlackMessage.click();
     }
      async clickOnSelectButtonInSlack(){
-        const selectingSlack= await this.driver.wait(until.elementLocated(By.xpath('/html/body/div/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[3]/div[1]/div/div/div[2]/div')));
+        const selectingSlack= await this.driver.wait(until.elementLocated(By.className('MuiFormControl-root w-100 css-198mb5z')));
         await selectingSlack.click();
      }
 
      async SelectingOption(){
-        const FirstOption=await this.driver.wait(until.elementLocated(By.xpath('/html/body/div[2]/div[3]/ul/li[2]')),5000);
+        const FirstOption=await this.driver.wait(until.elementLocated(By.className('authDropDownSpan')),5000);
         await FirstOption.click();
-        const SecondOption=await this.driver.wait(until.elementLocated(By.xpath('//*[@id=":rk:"]/li[2]')),5000);
-        await SecondOption.click();
-
-        const ThirdOption=await this.driver.wait(until.elementLocated(By.xpath(' //*[@id="root"]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[3]/div[2]/div/div/div/div[2]/div[1]/div/textarea')),5000);
+        // const SecondOption=await this.driver.wait(until.elementLocated(By.xpath('//*[@id=":rk:"]/li[2]')),5000);
+        // await SecondOption.click();
+        const ThirdOption=await this.driver.wait(until.elementLocated(By.css('[placeholder="Auth ID"]')),5000);
         await ThirdOption.click();
         await ThirdOption.sendKeys('auth2jzYTnsZ');
 
-        const VerifyOption=await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[3]/div[2]/div/div/button')),5000);
-        await VerifyOption.click();
+        // const VerifyOption=await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[3]/div[2]/div/div/button')),5000);
+        // await VerifyOption.click();
+
+        // const masterSliderBtns = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont button')), 5000);
+        // const verifyBtn = masterSliderBtns[4];
+        // verifyBtn.click();
+        // await this.driver.sleep(5000);
+     }
+
+     async clickOnVerify(){
+        const masterSliderBtns = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont button')), 5000);
+        const verifyBtn = masterSliderBtns[4];
+        verifyBtn.click();
+        await this.driver.sleep(5000);
      }
 
 
      async choosingInputSlack(){
-        const MenuOption=await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[4]/div[2]/div/div/div/div/div/button')),5000);
+        const MenuOption=await this.driver.wait(until.elementLocated(By.css('[data-testid="ArrowDropDownIcon"]')),5000);
         await MenuOption.click();
-        const ChoosingOption=await this.driver.wait(until.elementLocated(By.xpath('  //*[@id="combo-box-demo-option-1"]')),5000);
+        const ChoosingOption=await this.driver.wait(until.elementLocated(By.id('combo-box-demo-option-1')),5000);
         await ChoosingOption.click();
 
-        const FillingOption=await this.driver.wait(until.elementLocated(By.xpath(' //*[@id="root"]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[5]/div/div/div[2]/div[1]/div/textarea')),5000);
-        await FillingOption.click();
-        await FillingOption.sendKeys('walkover');
+        const FillingOption=await this.driver.wait(until.elementsLocated(By.className('input-parent')),5000);
+        const textArea=await FillingOption[1].findElement(By.css('textarea'));
+        await textArea.sendKeys('walkover');
         
-         const clickingtest=await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[6]/div/button[1] ')),5000);
-         await clickingtest.click();
+         const clickingtest=await this.driver.wait(until.elementsLocated(By.className('MuiButton-endIcon MuiButton-iconSizeMedium')),5000);
+         await clickingtest[1].click();
 
      }
 
+     async takeScreenShotAuthId(imagePath){
+        const authid = await this.driver.wait(until.elementLocated(By.className('flex-col-start-center w-100 gap-1')), 5000);
+        const screenShot = await authid.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot, imagePath);
 
-   
+
+     }
+
+     async takeScreenShotSlackResponse(imagePath) {
+        const slackResponse = await this.driver.wait(until.elementLocated(By.className('object-key-val')), 5000);
+        
+        // Scroll into view of the element
+        await this.driver.executeScript("arguments[0].scrollIntoView();", slackResponse);
+    
+        // Wait for a moment to ensure the scroll is complete (adjust the time based on your application)
+        await this.driver.sleep(1000);
+    
+        // Take the screenshot
+        const screenShot = await slackResponse.takeScreenshot();
+    
+        // Save the screenshot
+        await super.takeScreenShotAndSave(screenShot, imagePath);
+    }
+    
 
 }
 

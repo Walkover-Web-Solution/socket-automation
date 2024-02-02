@@ -32,7 +32,20 @@ async function testpluginSlack(){
              await slack.ClickOnSlackMessage();
              await slack.clickOnSelectButtonInSlack();
             await slack.SelectingOption();
+            await  slack.takeScreenShotAuthId('authenticationSlack.png');
+            await slack.clickOnVerify()
              await slack.choosingInputSlack();
+             await slack.takeScreenShotSlackResponse('slackResponse.png');
+             const isCaptureMode = await slack.isCaptureMode;
+             if (isCaptureMode) return;
+             const comparisonResult1 = await slack.compareScreenShot('authenticationSlack.png');
+             const num1 = Math.floor(comparisonResult1.rawMisMatchPercentage);
+             expect(num1).to.be.lessThan(20);
+
+             const comparisonResult2 = await slack.compareScreenShot('slackResponse.png');
+             const num2 = Math.floor(comparisonResult2.rawMisMatchPercentage);
+             expect(num2).to.be.lessThan(20);
+             
 
         }).timeout(700000);
        
