@@ -25,12 +25,30 @@ async function testMakeLive(){
             await live.closeSlider(1);
             await live.clickOnAddSteps();
             await live.clickOnAPI();
+            await live.takeAPIFieldScreenShotAndSave('emptyApiField.png');
+            
             await live.enterURL();
-            // await live.takeAPIFieldScreenShotAndSave('apiField.png');
             await live.testAndUpdate();
             await live.closeSlider(1);
             await live.clickMakeLive();
-            // await live.clickStepOne();
+            
+            await live.clickStepOne();
+            await live.clickOnEdit();
+            await live.takeAPIFieldScreenShotAndSave('apiField.png');
+
+
+            const stepsArray = await live.getStepsArray();
+            expect(stepsArray.length).to.equal(1);
+            //Empty Api Field VRT
+            const isCaptureMode = await live.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult1 = await live.compareScreenShot('emptyApiField.png');
+            const num1 = Math.floor(comparisonResult1.rawMisMatchPercentage);
+            expect(num1).to.be.lessThan(20);
+            //Api Field VRT
+            const comparisonResult2 = await live.compareScreenShot('apiField.png');
+            const num2 = Math.floor(comparisonResult2.rawMisMatchPercentage);
+            expect(num2).to.be.lessThan(20);
         }).timeout(700000);
 
 

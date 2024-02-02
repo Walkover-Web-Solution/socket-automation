@@ -15,7 +15,7 @@ dotenv.config();
 // // const testAddSteps = require('./test/specs/testAddSteps.spec');
 // // const testAskAI = require('./test/specs/testAskAI.spec');
 // // const testMoveProject=require('./test/specs/testMoveProject.spec')
-const testpluginSlack = require('./test/specs/testpluginSlack.spec')
+// const testpluginSlack = require('./test/specs/testpluginSlack.spec')
 // const testdiscardflow = require('./test/specs/testdiscardflow.spec')
 
 
@@ -31,11 +31,11 @@ const testpluginSlack = require('./test/specs/testpluginSlack.spec')
 // const webhookResponse = require('./test/specs/testWebhookResponse.spec');
 // const Comment = require('./test/specs/testCommentStep.spec');
 // const deleteStep =require('./test/specs/testDeleteStep.spec')
-// // const testRenameScript=require('./test/specs/testRenameScript.spec')
+// const testRenameScript=require('./test/specs/testRenameScript.spec')
 // const moveScript=require('./test/specs/testMoveScript.spec');
 // const duplicateScript=require('./test/specs/testDuplicateScript.spec')
 // const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
-// const testLiveFlow = require('./test/specs/testLiveFlow.spec');
+const testLiveFlow = require('./test/specs/testLiveFlow.spec');
 
 
 
@@ -58,12 +58,12 @@ async function test(){
 //     await testRenameProject();
 //     await deleteStep();
 //     // await testMoveProject();
-//     await testRenameScript();
+    // await testRenameScript();
 //     await moveScript();
-//     await duplicateScript();
+    // await duplicateScript();
     // await testSheetPlugin();
-    // await testLiveFlow();
-    await testpluginSlack(); 
+    await testLiveFlow();
+    // await testpluginSlack(); 
     // await testdiscardflow();
 }
 

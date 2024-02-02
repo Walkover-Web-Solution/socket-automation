@@ -3,13 +3,13 @@ const {endpoints} = require('../enums');
 const {expect} = require('chai');
 const flowtitle = "xyzflow12" 
 
-async function compareSS(projectPage , imagePath){
-    const comparisonResult = await projectPage.compareScreenShot(imagePath);
-    const isCaptureMode = await projectPage.isCaptureMode;
-    if(isCaptureMode) return;
-    const misMatch = Math.floor(comparisonResult.rawMisMatchPercentage);
-    return misMatch;
-}
+// async function compareSS(projectPage , imagePath){
+//     const comparisonResult = await projectPage.compareScreenShot(imagePath);
+//     const isCaptureMode = await projectPage.isCaptureMode;
+//     if(isCaptureMode) return;
+//     const misMatch = Math.floor(comparisonResult.rawMisMatchPercentage);
+//     return misMatch;
+// }
 
 async function testDeleteProject(){
     let projectPage;
@@ -20,7 +20,7 @@ async function testDeleteProject(){
         it('should open menu on mouse click' , async() => {
             await projectPage.open(endpoints.HOME);
             await projectPage.loginUser();
-            await projectPage.loginUser();
+            // await projectPage.loginUser();
             await projectPage.waitForEndpoint(endpoints.PROJECT , 60000);
             await projectPage.clickOnProjectName();
             // await projectPage.ClickOnMenuButtonmove();
@@ -42,7 +42,17 @@ async function testDeleteProject(){
             // await projectPage.scrduplicatedropbox(flowtitle);
             await projectPage.dropdown_org_proj(0,0);
             await projectPage.flowinput(flowtitle);
+            await projectPage.takeScreenshotDuplicateFlow('duplicateFlow.png');
             await projectPage.move_dup_btn_click();
+
+            const alertContainerText = await projectPage.errorBox();
+            expect(alertContainerText).to.equal('success\nFlow has been duplicate');
+            //VRT Test
+            const isCaptureMode = await projectPage.isCaptureMode;
+            if(isCaptureMode) return;
+            const comparisonResult = await projectPage.compareScreenShot('duplicateFlow.png');
+            const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+            expect(num).to.be.lessThan(20);
             
         }).timeout(30000)
 
@@ -51,9 +61,9 @@ async function testDeleteProject(){
         expect(flowtitle).to.equal(duplicate_scr);
         }).timeout(30000)
         
-        after(async() => {
-         projectPage.close();
-        })
+        // after(async() => {
+        //  projectPage.close();
+        // })
     })
 }
 
