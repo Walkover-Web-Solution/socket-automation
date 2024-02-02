@@ -47,16 +47,12 @@ class FlowPage extends Projects{
             if (steps.length > 1) {
                 console.log("Drag elements");
                 const firstElement = steps[0];
-                const p1 = await firstElement.findElement(By.css('p'));
+                const p1 = await firstElement.findElement(By.css('p')); // p contains a svg of drag image
                 const secondElement = steps[1];
                 await this.driver.actions().move({origin: firstElement }).press().move({origin : p1}).move({origin : secondElement}).release().perform();
-                // await super.waitForContentToLoad(By.id("#addStepsMainContainer"), 10000);
-                // const updatedOrder = await this.getElementsOrder(dragElement);
-                // expect(updatedOrder).to.not.deep.equal(initialOrder);
             } else {
                 console.log("No element to drag");
             }
-            
         } catch (error) {
             console.error('Error', error);
         }
