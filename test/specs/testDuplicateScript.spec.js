@@ -51,9 +51,9 @@ async function testDeleteProject(){
         expect(flowtitle).to.equal(duplicate_scr);
         }).timeout(30000)
         
-        // after(async() => {
-        //  projectPage.close();
-        // })
+        after(async() => {
+         projectPage.close();
+        })
     })
 }
 

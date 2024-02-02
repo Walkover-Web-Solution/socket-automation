@@ -20,6 +20,24 @@ async function testRenameScript(){
           await projectPage.renameScript(uniqueValue);
        
         }).timeout(30000);
+        it("Empty project name is not empty after renaming",async function(){
+          await projectPage.clickOnActionButtonMenuOfScript();
+          await projectPage.renameScript("");
+          await projectPage.refreshPage();
+          const array=await projectPage.getAllScriptText();
+          expect(array).not.to.include("");
+      }).timeout(70000);
+
+      it("project is not renamed with spaces",async function(){
+        await projectPage.clickOnActionButtonMenuOfScript();
+        await projectPage.renameScript("     ");
+          const alertBox=await projectPage.errorBox();
+          expect(alertBox).to.equal('error\nScript name too short');
+      }).timeout(70000);
+        after(async() => {
+          projectPage.close();
+         })
+        
       });
 }
 module.exports = testRenameScript;

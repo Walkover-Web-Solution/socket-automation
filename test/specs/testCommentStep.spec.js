@@ -45,6 +45,10 @@ async function testComment(){
                     //case:04 Remove comment
                     await comment.RemoveComment();
                 }).timeout(30000);
+
+                after(async() => {
+                    comment.close();
+                   })
               });
 }
 module.exports = testComment;

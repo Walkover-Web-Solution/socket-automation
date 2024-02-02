@@ -78,6 +78,10 @@ async function testFunction(){
                     
                     // await fun.create();
                 }).timeout(30000);
+
+                after(async() => {
+                    fun.close();
+                   })
               });
 }
 module.exports = testFunction;

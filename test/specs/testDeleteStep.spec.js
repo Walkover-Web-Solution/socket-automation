@@ -53,6 +53,10 @@ async function testFunction(){
 
                 }).timeout(30000);
 
+                after(async() => {
+                    fun.close();
+                   })
+
               });
 }
 module.exports = testFunction;

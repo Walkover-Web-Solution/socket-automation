@@ -35,6 +35,10 @@ async function testPauseProject(){
             const num = Math.floor(comparisonResult.rawMisMatchPercentage);
             expect(num).to.be.lessThan(20);
         }).timeout(700000);
+
+        after(async() => {
+            projectPage.close();
+           })
     })    
 }
 

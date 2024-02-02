@@ -53,6 +53,10 @@ class FlowPage extends Projects{
             } else {
                 console.log("No element to drag");
             }
+                // await super.waitForContentToLoad(By.id("#addStepsMainContainer"), 10000);
+                // const updatedOrder = await this.getElementsOrder(dragElement);
+                // expect(updatedOrder).to.not.deep.equal(initialOrder);
+            return "Drag and drop successful";
         } catch (error) {
             console.error('Error', error);
         }
@@ -251,6 +255,14 @@ class FlowPage extends Projects{
         await buttonsInSlider[1].click();
     }
 
+    async closeSliderFun(){
+        await super.waitForContentToLoad(By.css('[class*="custom_slider__halfscreen"]') , 10000);
+        const masterSlider = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        await super.waitForContentToBeVisible(masterSlider , 10000);
+        const buttonsInSlider = await masterSlider.findElements(By.css('button'));
+        await buttonsInSlider[2].click();
+    }
+
     async clickOnVariableSliderAccordion(){
         const accordions = await this.driver.findElements(By.css('[class*="variableslider__accordion"]'));
         await accordions[0].click();
@@ -322,7 +334,10 @@ class FlowPage extends Projects{
         return text;
     }
 
-    async takeScreenShotFunctionSlider(imagePath){
+    async takeScreenShotFunctionSlider(imagePath , type){
+        if(type === "API") {
+            await this.driver.executeScript('arguments[0].scrollIntoView(true)' , this.apiEditPanel );
+        }
         const stepNameInput = await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
         const screenShot = await stepNameInput.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot , imagePath);

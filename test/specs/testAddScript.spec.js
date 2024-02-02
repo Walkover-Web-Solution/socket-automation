@@ -21,7 +21,7 @@ async function testCreateScript(){
     }catch(err){
         console.log(err);
     }finally{
-        // await projectsPage.close();
+        await ScriptPage.close();
     }
 }
 

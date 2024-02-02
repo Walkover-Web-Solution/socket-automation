@@ -16,7 +16,7 @@ async function testIfBlockStep(){
             ifStep=new IfStep()
         })
 
-        it("if block created successfully with true condtiton",async function(){
+        it("Opening and creating new flow",async function(){
             await ifStep.open(endpoints.HOME);
             await ifStep.loginUser();
             await ifStep.waitForEndpoint(endpoints.PROJECT , 60000);
@@ -26,6 +26,9 @@ async function testIfBlockStep(){
             // await ifStep.clickOnScript();
             await ifStep.closeSlider(); // close trigger slider
             await ifStep.waitForFlowPageToOpen();
+        }).timeout(700000);
+
+            it("if block created successfully with true condtiton",async function(){
             await ifStep.clickOnAddSteps();
             await ifStep.getAllStepsUsedFlow();
             await ifStep.clickOnStep(stepIndex.IF);
@@ -55,12 +58,17 @@ async function testIfBlockStep(){
             const isCaptureMode = await ifStep.isCaptureMode;
             if(isCaptureMode) return;
             const comparisonResult = await ifStep.compareScreenShot('ifFalse.png'); 
+           
             const num = Math.floor(comparisonResult.rawMisMatchPercentage);
             expect(num).to.be.lessThan(20);
             await ifStep.crossIfBlock();
             // await ifStep.crossIfBlock();
             // await ifStep.deleteIfBlock();
         }).timeout(700000);
+
+        after(async() => {
+            ifStep.close();
+           })
     });
 };
 

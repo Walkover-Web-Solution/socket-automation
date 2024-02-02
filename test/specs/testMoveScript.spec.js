@@ -49,9 +49,9 @@ async function testDeleteProject(){
         expect(scrnam).to.equal(newscr);
         }).timeout(30000)
         
-        // after(async() => {
-        //  projectPage.close();
-        // })
+        after(async() => {
+         projectPage.close();
+        })
     })
 }
 
