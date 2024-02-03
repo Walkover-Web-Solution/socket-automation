@@ -21,6 +21,12 @@ const stepIndex = {
     COMMENT : 3,
     FUNCTION : 4
 }
+const stepIndexIf = {
+    API : 0,
+    VARIABLE : 1,
+    COMMENT : 2,
+    FUNCTION : 3
+}
 
 const apiIndex = {
     GET : 0,
@@ -46,4 +52,4 @@ const actionsOfPro = {
     PAUSE : 3
 }
 
-module.exports = {endpoints , stepIndex , apiIndex , actions, actionsOfPro};
+module.exports = {endpoints , stepIndex , stepIndexIf , apiIndex , actions, actionsOfPro};
