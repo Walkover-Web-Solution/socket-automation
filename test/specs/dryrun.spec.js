@@ -6,10 +6,13 @@ const DryRunfile = require('../pages/dryrun');
 const { exitCode } = require('process');
 const { CONNREFUSED } = require('dns');
 
-const dryrun=new DryRunfile();
 async function dryrunflow(){
     
     describe('Selenium Tests', function () {
+      let dryrun;
+        before(() => {
+            dryrun = new DryRunfile();
+        })
         it('Run the Selenium script and select POST request', async function () {
           await dryrun.open();
           await dryrun.openProject();
