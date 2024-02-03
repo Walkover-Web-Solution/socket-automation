@@ -5,9 +5,13 @@ const {assert}=require('mocha');
 const getUniqueName=require('../../utilities/getDate')
 const uniqueValue = getUniqueName('new');
 
-const projectsPage= new Projects();
+
 
 async function testRenameProject(){
+    let projectsPage;
+    before(() => {
+        projectsPage = new Projects();
+    })
     describe("Create rename project test cases",async function(){
         it("Project renamed successfully !",async ()=>{
             await projectsPage.open(endpoints.HOME);

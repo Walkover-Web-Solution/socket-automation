@@ -12,8 +12,8 @@ const getUniqueName = require('../../utilities/getDate');
 async function testIfBlockStep(){
     
     // let flowPage;
-    let sheets;
     describe('test cases for IF condition under flowPage',async function(){
+        let sheets;
         before(() => {
             sheets = new Sheets();
         })

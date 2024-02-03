@@ -7,8 +7,9 @@ const {expect}=require('chai');
 
 async function testMakeLive(){
     
-    let live;
+ 
     describe('test cases for making Web Hook flow live',async function(){
+        let live;
         before(() => {
             live = new Live();
         })

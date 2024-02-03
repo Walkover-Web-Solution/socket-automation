@@ -6,10 +6,13 @@ const { CONNREFUSED } = require('dns');
 const { waitForDebugger } = require('inspector');
 
 
-const comment= new Comment();
-
 async function testComment(){
             describe('Comment Test Script', function () {
+
+                let comment;
+                before(() => {
+                    comment = new Comment();
+                })
                 it('Case:01 Comment Block clicked', async function () {
                     await comment.open(endpoints.HOME);
                     await comment.loginUser();

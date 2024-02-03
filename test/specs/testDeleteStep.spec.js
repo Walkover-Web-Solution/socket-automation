@@ -3,9 +3,11 @@ const {endpoints , stepIndex} = require('../enums');
 const { expect } = require('chai');
 
 
-const fun= new Function();
-
 async function testFunction(){
+    let fun;
+    before(() => {
+        fun = new Function();
+    })
             describe('Step Duplicate', function () {
                 it('Case:01 Creating function', async function () {
                     await fun.open(endpoints.HOME);
