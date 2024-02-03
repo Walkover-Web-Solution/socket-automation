@@ -1,22 +1,22 @@
 const dotenv = require('dotenv');
-const { contains } = require('jquery');
+// const { contains } = require('jquery');
 
 dotenv.config();
-const testCreateOrg = require('./test/specs/testCreateOrg.spec');
-const testCreateProject = require('./test/specs/testCreateProject.spec');
-const testCreateScript = require('./test/specs/testCreateScript.spec');
- const testPauseScript = require('./test/specs/testPauseScript.spec');
-const testRenameScript = require('./test/specs/testRenameScript.spec');
-const testDeleteScript = require('./test/specs/testDeleteScript.spec');
-const testPauseProject = require('./test/specs/testPauseProject.spec');
-const testDeleteProject = require('./test/specs/testDeleteProject.spec');
-const testInvocation = require('./test/specs/testInvocation_prod.spec');
-const testDragAndDrop = require('./test/specs/testDragAndDrop.spec');
-// const testAddSteps = require('./test/specs/testAddSteps.spec');
-// const testAskAI = require('./test/specs/testAskAI.spec');
-// const testMoveProject=require('./test/specs/testMoveProject.spec')
+// const testCreateOrg = require('./test/specs/testCreateOrg.spec');
+// const testCreateProject = require('./test/specs/testCreateProject.spec');
+// const testCreateScript = require('./test/specs/testCreateScript.spec');
+//  const testPauseScript = require('./test/specs/testPauseScript.spec');
+// const testRenameScript = require('./test/specs/testRenameScript.spec');
+// const testDeleteScript = require('./test/specs/testDeleteScript.spec');
+// const testPauseProject = require('./test/specs/testPauseProject.spec');
+// const testDeleteProject = require('./test/specs/testDeleteProject.spec');
+// const testInvocation = require('./test/specs/testInvocation_prod.spec');
+// const testDragAndDrop = require('./test/specs/testDragAndDrop.spec');
+// // const testAddSteps = require('./test/specs/testAddSteps.spec');
+// // const testAskAI = require('./test/specs/testAskAI.spec');
+// // const testMoveProject=require('./test/specs/testMoveProject.spec')
 const testpluginSlack = require('./test/specs/testpluginSlack.spec')
-const testdiscardflow = require('./test/specs/testdiscardflow.spec')
+// const testdiscardflow = require('./test/specs/testdiscardflow.spec')
 
 
 // // testAskAI();
@@ -35,7 +35,7 @@ const deleteStep =require('./test/specs/testDeleteStep.spec')
 const moveScript=require('./test/specs/testMoveScript.spec');
 const duplicateScript=require('./test/specs/testDuplicateScript.spec')
 // const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
-const testLiveFlow = require('./test/specs/testLiveFlow.spec');
+// const testLiveFlow = require('./test/specs/testLiveFlow.spec');
 
 
 
@@ -62,9 +62,9 @@ async function test(){
     await moveScript();
     await duplicateScript();
     // await testSheetPlugin();
-    await testLiveFlow();
+    // await testLiveFlow();
     await testpluginSlack(); 
-    await testdiscardflow();
+    // await testdiscardflow();
 }
 
 // test();

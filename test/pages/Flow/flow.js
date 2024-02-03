@@ -499,6 +499,67 @@ class FlowPage extends Projects{
         const dryRun=await this.driver.findElement(By.className("flex-start-end p-1 MuiBox-root css-0"));
         await dryRun.findElement(By.tagName("button")).click();
     }
+    async closebtn(){
+        const close_btn = await this.driver.findElement(By.xpath(`//div[contains(@class , 'MuiBox-root css-0')]//button[contains(@aria-label , 'Close')]`))
+        close_btn.click()
+    }
+    async functionresponse(){
+        await super.waitForContentToLoad(By.xpath('//span[contains(@class , "__json-value__")]'));
+        const response_function = await this.driver.findElement(By.xpath(`//span[contains(@class , "__json-value__")]`))
+        const response = response_function.getText()
+        // console.log(response)
+    }
+    async createConditionIf(confititon_name){
+        await super.waitForContentToLoad(By.className("ifblockslider__editbox m-1 MuiBox-root css-0") , 10000);    
+        const parentclass=await this.driver.findElement(By.className("ifblockslider__editbox m-1 MuiBox-root css-0"));
+        const text_field= await parentclass.findElement(By.className("p-1"));
+        await text_field.sendKeys(confititon_name);
+        await super.waitForContentToLoad(By.className("user focused"))
+        // await this.driver.sleep()
+        await text_field.sendKeys(Key.ENTER)
+        await this.driver.sleep(2000)
+        await text_field.sendKeys(" >5 ")
+        await this.driver.sleep(2000)
+        const create=await parentclass.findElement(By.xpath("//*[text()='Create']"));
+        await this.driver.sleep(2000)
+        await create.click();
+    }
+    async clickAddStepsInIf(){
+        await super.waitForContentToLoad(By.xpath(`//input[@placeholder = "Add or drop step here"]`));
+        const add_step = this.driver.findElement(By.xpath(`//input[@placeholder = "Add or drop step here"]`))
+            await add_step.click();
+    }
+    async writeComment(comment){
+        const commnetField = await this.driver.findElement(By.className("inputcomment__editcomment"));
+         commnetField.click();
+        //  commnetField.clear();
+         commnetField.sendKeys(comment);
+       
+    }
+    async clickonresponse(){
+        const res = await this.driver.findElement(By.className("response__container block"))
+        await res.click();
+}
+async makelive(){
+    // await this.driver.sleep(2000)
+    await super.waitForContentToLoad(By.className("publishblockButtonShow w-100"));
+    const publish  = await this.driver.findElement(By.xpath("//button[text() = 'Make Live']"));
+    await this.driver.sleep(2000)
+    await publish.click()
+    await super.waitForContentToLoad(By.className("MuiDialog-paperWidthSm"));
+    const okpublish  = await this.driver.findElement(By.className("primary-btn"));
+    await okpublish.click()
+    await this.driver.sleep(2000)
+}
+async dryrunclick(){
+    const test_data = await this.driver.findElements(By.className("css-rm5pwz"))
+    await test_data[1].click() 
+}
+async dryrunbtn(){
+    await super.waitForContentToLoad(By.className("dry-run-btn"))
+    const dry_run =  await this.driver.findElement(By.className("dry-run-btn"))
+    await dry_run.click()
+}
 }
 
 module.exports = FlowPage;
