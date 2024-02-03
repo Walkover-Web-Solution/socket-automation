@@ -48,7 +48,7 @@ async function testApiStep(methodType){
 
         it('api method should be editable' , async() => {
             await flowPage.selectApiMethod(apiIndex[methodType]);
-            const method = await flowPage.getSelectedApiMethod();
+            let method = await flowPage.getSelectedApiMethod();
             expect(method).to.be.equal(methodType);
         }).timeout(30000);
 

@@ -270,21 +270,28 @@ class FlowPage extends Projects{
     }
 
     async selectApiMethod(methodTypeIndex){
+
         const apiMethodDropDown = await this.apiContent.findElement(By.css('input'));
+
         const requestMethodDiv = await apiMethodDropDown.findElement(By.xpath('.//..'));
-        await requestMethodDiv.click();
+        await requestMethodDiv.click();       
+
 
         const allDivElements = await this.driver.findElements(By.css('div'));
         const [requestMethodListDiv] = allDivElements.slice(-2);
 
         const requestMethodList = await requestMethodListDiv.findElements(By.css('li'));
+
         await requestMethodList[methodTypeIndex].click();
         await super.waitForContentToBeNotVisible(requestMethodListDiv , 10000);
     }
 
-    async getSelectedApiMethod(){
-        const apiMethodDropDown = await this.apiContent.findElement(By.css('input'));
-        const text = await apiMethodDropDown.getAttribute('value');
+    async getSelectedApiMethod(){        
+        await this.driver.sleep(1000);
+
+        let apiMethodDropDown = await this.apiContent.findElement(By.css('input'));
+
+        let text = await apiMethodDropDown.getAttribute('value');
         return text.toUpperCase();
     }
 
@@ -308,7 +315,7 @@ class FlowPage extends Projects{
         await apiname.sendKeys(Key.ENTER);
         const api=await this.driver.findElement(By.id("requestInput"))
         await api.click();
-        await api.sendKeys("https://v2.jokeapi.dev/joke/Any?type=single");
+        await api.sendKeys("https://jsonplaceholder.typicode.com/users");
         //now we fetch Dry Run ----- Save ----- Debug ...... Button
         const listButtons=await this.driver.findElement(By.className("apiActionContainer MuiBox-root css-0"));
         const buttonArray=await listButtons.findElements(By.tagName("button"));

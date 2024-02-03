@@ -1,4 +1,4 @@
-const Projects = require('../pages/Project/projects');
+const Projectss = require('../pages/Project/projects');
 const {endpoints} = require('../enums');
 const {expect}=require('chai');
 const {assert}=require('mocha');
@@ -8,11 +8,12 @@ const uniqueValue = getUniqueName('new');
 
 
 async function testRenameProject(){
-    let projectsPage;
-    before(() => {
-        projectsPage = new Projects();
-    })
+    
     describe("Create rename project test cases",async function(){
+        let projectsPage;
+    before(() => {
+        projectsPage = new Projectss();
+    })
         it("Project renamed successfully !",async ()=>{
             await projectsPage.open(endpoints.HOME);
             await projectsPage.loginUser();
