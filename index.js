@@ -15,7 +15,7 @@ dotenv.config();
 // // const testAddSteps = require('./test/specs/testAddSteps.spec');
 // // const testAskAI = require('./test/specs/testAskAI.spec');
 // // const testMoveProject=require('./test/specs/testMoveProject.spec')
-const testpluginSlack = require('./test/specs/testpluginSlack.spec')
+// const testpluginSlack = require('./test/specs/testpluginSlack.spec')
 // const testdiscardflow = require('./test/specs/testdiscardflow.spec')
 
 
@@ -36,6 +36,7 @@ const testpluginSlack = require('./test/specs/testpluginSlack.spec')
 // const duplicateScript=require('./test/specs/testDuplicateScript.spec')
 // const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
 // const testLiveFlow = require('./test/specs/testLiveFlow.spec');
+const ifflowwork = require('./test/specs/ifflowwork.spec')
 
 
 
@@ -46,11 +47,11 @@ async function test(){
 //     await testDeleteScript();
 //    await testVariableStep();
     // await testGetStep();
-//     await testFunction();
+    // await testFunction();
 //     await testDragAndDrop();
 //     await testInvocation();
 //     await webhookResponse();
-//     await testIfBlockStep();
+    // await testIfBlockStep();
 //      await testPauseScript();
 //     await testPauseProject();
 //     await Comment();
@@ -63,8 +64,9 @@ async function test(){
 //     await duplicateScript();
     // await testSheetPlugin();
     // await testLiveFlow();
-    await testpluginSlack(); 
+    // await testpluginSlack(); 
     // await testdiscardflow();
+    await ifflowwork();
 }
 
 // test();

@@ -11,25 +11,6 @@ async function testPauseScript(){
         before(async() => {
             projectPage = new ProjectPage();
         })
-        
-        // it('should pause script on pause button click' , async()=>{
-        //     await projectPage.open(endpoints.HOME);
-        //     await projectPage.loginUser();
-        //     await projectPage.waitForEndpoint(endpoints.PROJECT , 60000);
-        //     await projectPage.clickOnProjectName();
-        //     await projectPage.waitForScriptSlider();
-        //     nameOfPausedScript = await projectPage.clickOnActionButtonMenuOfScript();
-        //     await projectPage.pauseScript();
-        //     const nameOfScripts = await projectPage.getListOfScripts();
-        //     expect(nameOfScripts).to.not.include(nameOfPausedScript);
-        //     await projectPage.takeScreenShotpauseScript('menuScript.png');
-        //     const isCaptureMode = await projectPage.isCaptureMode;
-        //     if(isCaptureMode) return;
-        //     const comparisonResult = await projectPage.compareScreenShot('menuScript.png'); 
-        //     const orgNameInUI=await projectPage.fetchOrgName();
-        //     const orgNameInput = projectPage.orgNameInput;
-        //     expect(orgNameInUI).to.equal(orgNameInput);  
-        // })
 
         it('should pause script on pause button click', async () => {
             await projectPage.open(endpoints.HOME);
