@@ -315,7 +315,7 @@ class FlowPage extends Projects{
         await apiname.sendKeys(Key.ENTER);
         const api=await this.driver.findElement(By.id("requestInput"))
         await api.click();
-        await api.sendKeys("https://jsonplaceholder.typicode.com/users");
+        await api.sendKeys("https://jsonplaceholder.typicode.com/posts/1");
         //now we fetch Dry Run ----- Save ----- Debug ...... Button
         const listButtons=await this.driver.findElement(By.className("apiActionContainer MuiBox-root css-0"));
         const buttonArray=await listButtons.findElements(By.tagName("button"));
