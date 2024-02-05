@@ -270,28 +270,22 @@ class FlowPage extends Projects{
     }
 
     async selectApiMethod(methodTypeIndex){
-
         const apiMethodDropDown = await this.apiContent.findElement(By.css('input'));
-
         const requestMethodDiv = await apiMethodDropDown.findElement(By.xpath('.//..'));
-        await requestMethodDiv.click();       
-
+        await requestMethodDiv.click();
 
         const allDivElements = await this.driver.findElements(By.css('div'));
         const [requestMethodListDiv] = allDivElements.slice(-2);
 
         const requestMethodList = await requestMethodListDiv.findElements(By.css('li'));
-
         await requestMethodList[methodTypeIndex].click();
-        await super.waitForContentToBeNotVisible(requestMethodListDiv , 10000);
+        // await super.waitForContentToBeNotVisible(requestMethodListDiv , 10000);
     }
 
-    async getSelectedApiMethod(){        
-        await this.driver.sleep(1000);
-
-        let apiMethodDropDown = await this.apiContent.findElement(By.css('input'));
-
-        let text = await apiMethodDropDown.getAttribute('value');
+    async getSelectedApiMethod(){
+        const apiMethodDropDown = await this.apiContent.findElement(By.css('input'));
+        const text = await apiMethodDropDown.getAttribute('value');
+        // console.log(text);
         return text.toUpperCase();
     }
 
@@ -300,7 +294,8 @@ class FlowPage extends Projects{
             const textEditorDiv = await this.apiContent.findElement(By.id('jsonEditor'));
             const textEditor = await textEditorDiv.findElement(By.css('textarea'));
             if(requestMethodIndex === 1) await textEditor.sendKeys(process.env.POST_REQUEST_BODY);
-            else await textEditor.sendKeys(process.env.PUT_REQUEST_BODY);
+            if(requestMethodIndex === 2) await textEditor.sendKeys(process.env.PUT_REQUEST_BODY);
+            if(requestMethodIndex === 4) await textEditor.sendKeys(process.env.PUT_REQUEST_BODY);
             await this.driver.sleep(1000);
         } 
     }
