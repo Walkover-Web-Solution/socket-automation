@@ -7,8 +7,6 @@ const {endpoints , stepIndex , apiIndex} = require('../enums');
 const {expect}=require('chai');
 const getUniqueName = require('../../utilities/getDate');
 
-// const flowPage = new FlowPage();
-
 async function testIfBlockStep(){
     
     // let flowPage;
@@ -49,26 +47,6 @@ async function testIfBlockStep(){
             // await ifStep.crossIfBlock();
             // await ifStep.deleteIfBlock();
         }).timeout(700000);
-       
-        // it("if block created successfully with false condition",async function(){
-        //     // await ifStep.waitFor5Min();
-        //     // await ifStep.waitForFlowPageToOpen();
-        //     await ifStep.clickOnAddSteps();
-        //     await ifStep.getAllStepsUsedFlow();
-        //     await ifStep.clickOnStep(stepIndex.IF);
-        //     await ifStep.createConditionIf("false");
-        //     const text_name=await ifStep.responseOfIfBlockIf();
-        //     expect(text_name).to.include("false");
-        //     await ifStep.takeScreenShotFunctionSlider('ifFalse.png');
-        //     const isCaptureMode = await ifStep.isCaptureMode;
-        //     if(isCaptureMode) return;
-        //     const comparisonResult = await ifStep.compareScreenShot('ifFalse.png'); 
-        //     const num = Math.floor(comparisonResult.rawMisMatchPercentage);
-        //     expect(num).to.be.lessThan(20);
-        //     await ifStep.crossIfBlock();
-        //     // await ifStep.crossIfBlock();
-        //     // await ifStep.deleteIfBlock();
-        // }).timeout(700000);
     });
 };
 

@@ -340,6 +340,15 @@ contentEnter.sendKeys(content);
         const screenShot = await responseElement.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot , imagePath);
     }
+
+    async takeScreenshotDuplicateFlow(imagePath)
+    {   
+        await super.waitForContentToLoad(By.className('duplicate-flow-container'), 10000);
+        const duplicateFlowDialogBox = await this.driver.findElement(By.className('duplicate-flow-container'), 5000);
+        const screenShot = await duplicateFlowDialogBox.takeScreenshot();
+        await super.takeScreenShotAndSave(screenShot, imagePath);
+    }
+
     async clickOnActionButtonMenuProject(){
         await super.waitForContentToLoad(By.css('[class*="actionBtnContainer"]'),10000);
         const actionButtonContainer = await this.driver.findElement(By.css('[class*="actionBtnContainer"]'));
@@ -643,6 +652,7 @@ contentEnter.sendKeys(content);
     async move_dup_btn_click(){
         const duplicatebtn = await this.driver.findElement(By.className("MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"))
         await duplicatebtn.click();
+        await this.driver.sleep(500);
     }
 
     async clickMovescript(){

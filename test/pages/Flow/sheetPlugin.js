@@ -12,11 +12,11 @@ class Sheets extends FlowPage{
 
     
     async enterFields() {
-        console.log('Here going in');
+        // console.log('Here going in');
         const inputFields = await this.driver.wait(until.elementsLocated(By.css('[placeholder = "type something"]')), 5000);
     
 
-        console.log("Sheet ID");
+        // console.log("Sheet ID");
         await inputFields[0].sendKeys('1Qzi54LJ1yVL-M4J5LEAs97runpMAzRI_vUt56WpsGAM');
         await inputFields[0].sendKeys(Key.TAB);
         // console.log("Sheet NAme");
@@ -31,39 +31,40 @@ class Sheets extends FlowPage{
         await inputFields[3].sendKeys('3');
         await inputFields[0].sendKeys(Key.TAB);
 
-        const testBtn = await this.driver.wait(until.elementLocated(By.xpath('/html/body/div[1]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[8]/div/button[1]')), 5000);
+        // const testBtn = await this.driver.wait(until.elementLocated(By.xpath('/html/body/div[1]/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[8]/div/button[1]')), 5000);
+        const buttons = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont button')), 5000);
+        const testBtn = buttons[9];
         testBtn.click();
     }
 
     async clickOnSheets() {
-        const googleSheetBtn = await this.driver.wait(until.elementLocated(By.xpath('/html/body/div[2]/div/ul/li[6]/button')), 5000);
+        // const googleSheetBtn = await this.driver.wait(until.elementLocated(By.xpath('/html/body/div[2]/div/ul/li[6]/button')), 5000);
+        const googleSheetBtn = await this.driver.wait(until.elementLocated(By.id(':rc:-option-5')), 5000);
         googleSheetBtn.click();
+        await this.driver.sleep(500);
     }
 
     async enterAuthId(id) {
         const dynamicAuthBtn = await this.driver.wait(until.elementLocated(By.css('[data-value = "dynamic_auth"]')), 5000);
-        // const listElements = await this.driver.wait(until.elementsLocated(By.css('[role="menuitem"]')), 5000);
-        // console.log(dynamicAuthBtn);
         dynamicAuthBtn.click();
 
         const authIdInput = await this.driver.wait(until.elementLocated(By.css('[placeholder="Auth ID"]')), 5000);
         authIdInput.sendKeys('auth2zI9JksP');
         
-        const verifyBtn = await this.driver.wait(until.elementLocated(By.xpath('/html/body/div/div/div[3]/div/div[3]/div[5]/div/div/div/div[1]/div[3]/div[2]/div/div/button')), 5000);
+        const masterSliderBtns = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont button')), 5000);
+        const verifyBtn = masterSliderBtns[4];
+
         verifyBtn.click();
-        // await this.driver.wait(until.elementIsNotVisible(verifyBtn), 5000);
         await this.driver.sleep(5000);
-        console.log("out of this function");
-        // const randomIndex = Math.floor(Math.random() * listElements.length);
-        // listElements[randomIndex].click();
-        // const listElements = await unorderedList.findElements(By.css('[role="menuitem"]'));
-        // console.log(listElements);
     }
 
     async clickAddSheet()
     {
         // await this.driver.wait(until.)
-        const addSheetBtn = await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div/nav/div[1]/div')), 5000);
+        // const addSheetBtn = await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div/nav/div[1]/div')), 5000);
+        const pluginForm = await this.driver.wait(until.elementLocated(By.className('pluuginTypeForn')), 5000);
+        const addSheetBtn = await pluginForm.findElement(By.css('div'));
+        // const addSheetBtn = await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div/nav/div[1]/div')), 5000);
         await addSheetBtn.click();
     }
 
@@ -73,7 +74,6 @@ class Sheets extends FlowPage{
         await dropDownBtn.click();
     }
 
-   
 
 }
 
