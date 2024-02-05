@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-const { contains } = require('jquery');
+// const { contains } = require('jquery');
 
 dotenv.config();
 // const testCreateOrg = require('./test/specs/testCreateOrg.spec');
@@ -35,7 +35,7 @@ dotenv.config();
 // const moveScript=require('./test/specs/testMoveScript.spec');
 // const duplicateScript=require('./test/specs/testDuplicateScript.spec')
 // const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
-const testLiveFlow = require('./test/specs/testLiveFlow.spec');
+// const testLiveFlow = require('./test/specs/testLiveFlow.spec');
 
 
 
@@ -46,11 +46,11 @@ async function test(){
 //     await testDeleteScript();
 //    await testVariableStep();
     // await testGetStep();
-//     await testFunction();
+    // await testFunction();
 //     await testDragAndDrop();
 //     await testInvocation();
 //     await webhookResponse();
-//     await testIfBlockStep();
+    // await testIfBlockStep();
 //      await testPauseScript();
 //     await testPauseProject();
 //     await Comment();
@@ -62,9 +62,14 @@ async function test(){
 //     await moveScript();
     // await duplicateScript();
     // await testSheetPlugin();
-    await testLiveFlow();
-    // await testpluginSlack(); 
+    // await testLiveFlow();
+    await testpluginSlack(); 
     // await testdiscardflow();
+<<<<<<< HEAD
+    await ifflowwork();
+=======
+    await textflow()
+>>>>>>> 24c2ca64a916d1ca101266b6009f9e266b2d5cd9
 }
 
 // test();
