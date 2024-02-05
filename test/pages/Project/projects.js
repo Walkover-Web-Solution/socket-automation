@@ -77,11 +77,21 @@ class Projects extends Login{
 
     async customResponseEnter(content){
         await super.waitForContentToLoad(By.className('responseslider__container w-100 column   MuiBox-root css-0'),10000);
+        
         const resSlider= await this.driver.findElement(By.className('mt-1 pos-rel MuiBox-root css-0')) ;
+        const cusBtn= await resSlider.findElement(By.xpath("//*[text()='Custom']"));
+        cusBtn.click();
+        await super.waitForContentToLoad(By.xpath("//*[text()='//Write return statement here...']"))
         const contentBtn= await resSlider.findElement(By.xpath("//*[text()='//Write return statement here...']"));
         contentBtn.click();
         const contentEnter= await resSlider.findElement(By.className("ace_text-input"));
-        contentEnter.sendKeys(content); 
+        contentEnter.sendKeys("`")
+        contentEnter.sendKeys(Key.BACK_SPACE)
+contentEnter.sendKeys(content);
+
+        await contentEnter.sendKeys("`")
+        // contentEnter.sendKeys(Key.ENTER)
+        // contentEnter.sendKeys(Key.BACK_SPACE) 
         const saveBtn=await resSlider.findElement(By.xpath("//*[text()='Save']"));
         saveBtn.click();
     }

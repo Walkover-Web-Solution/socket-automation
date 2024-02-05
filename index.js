@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-const { contains } = require('jquery');
+// const { contains } = require('jquery');
 
 dotenv.config();
 // const testCreateOrg = require('./test/specs/testCreateOrg.spec');
@@ -36,7 +36,11 @@ dotenv.config();
 // const duplicateScript=require('./test/specs/testDuplicateScript.spec')
 // const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
 // const testLiveFlow = require('./test/specs/testLiveFlow.spec');
+<<<<<<< HEAD
 const ifflowwork = require('./test/specs/ifflowwork.spec')
+=======
+const textflow = require('./test/specs/testapifunctiondryrun.spec')
+>>>>>>> 24c2ca64a916d1ca101266b6009f9e266b2d5cd9
 
 
 
@@ -66,7 +70,11 @@ async function test(){
     // await testLiveFlow();
     // await testpluginSlack(); 
     // await testdiscardflow();
+<<<<<<< HEAD
     await ifflowwork();
+=======
+    await textflow()
+>>>>>>> 24c2ca64a916d1ca101266b6009f9e266b2d5cd9
 }
 
 // test();

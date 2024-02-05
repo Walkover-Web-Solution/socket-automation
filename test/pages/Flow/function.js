@@ -55,7 +55,7 @@ class Function extends FlowPage{
         const editor = await functionBlock.findElement(By.className('ace_comment ace_placeholder'));
         await editor.click();
         const textArea= functionBlock.findElement(By.className('ace_text-input'));
-        textArea.sendKeys("return true");
+        textArea.sendKeys(content);
    
    
        
