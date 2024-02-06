@@ -41,14 +41,37 @@ async function testApiStep(methodType){
         }).timeout(30000);
 
         it('api url field should be editable' , async() => {
-            await flowPage.fillUrl(process.env.GET_REQUEST_URL);
-            const url = await flowPage.getUrl();
-            expect(url).to.be.equal(process.env.GET_REQUEST_URL);
+            if(methodType==="GET"){
+                await flowPage.fillUrl(process.env.GET_REQUEST_URL);
+                const url = await flowPage.getUrl();
+                expect(url).to.be.equal(process.env.GET_REQUEST_URL);
+            }
+           else if(methodType==="POST"){
+                await flowPage.fillUrl(process.env.POST_REQUEST_URL);
+                const url = await flowPage.getUrl();
+                expect(url).to.be.equal(process.env.POST_REQUEST_URL);
+            }
+            else if(methodType==="PUT"){
+                await flowPage.fillUrl(process.env.PUT_REQUEST_URL);
+                const url = await flowPage.getUrl();
+                expect(url).to.be.equal(process.env.PUT_REQUEST_URL);
+            }
+            else if(methodType==="DELETE"){
+                await flowPage.fillUrl(process.env.DELETE_REQUEST_URL);
+                const url = await flowPage.getUrl();
+                expect(url).to.be.equal(process.env.DELETE_REQUEST_URL);
+            }
+            else if(methodType==="PATCH"){
+                await flowPage.fillUrl(process.env.PATCH_REQUEST_URL);
+                const url = await flowPage.getUrl();
+                expect(url).to.be.equal(process.env.PATCH_REQUEST_URL);
+            }
         }).timeout(30000);
 
         it('api method should be editable' , async() => {
             await flowPage.selectApiMethod(apiIndex[methodType]);
-            const method = await flowPage.getSelectedApiMethod();
+            let method = await flowPage.getSelectedApiMethod();
+            // console.log(method);
             expect(method).to.be.equal(methodType);
         }).timeout(30000);
 

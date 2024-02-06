@@ -4,7 +4,6 @@ const { expect } = require('chai');
 const { exitCode } = require('process');
 const { CONNREFUSED } = require('dns');
 
-const response= new Response();
 
 async function testResponse(){
             // await response.open(endpoints.HOME);
@@ -18,6 +17,10 @@ async function testResponse(){
             // await response.openResponseBlock();
 
             describe('Response Test Script', function () {
+                let response;
+                before(() => {
+                    response = new Response();
+                })
                 it('Case:01 Response Block open', async function () {
                     await response.open(endpoints.HOME);
                     await response.clickOnLoginWithGoogle();

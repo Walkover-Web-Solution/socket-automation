@@ -1,53 +1,57 @@
-const Function = require('../pages/Flow/function.js');
+const FunctionDrag = require('../pages/Flow/function.js');
 const { endpoints, stepIndex } = require('../enums');
 const { expect } = require('chai');
 
-const fun = new Function();
 
-async function testFunction() {
+async function testDragFunction() {
+   
     describe('Drag and Drop Elements', function () {
+        let funDrag;
+        before(() => {
+            funDrag = new FunctionDrag();
+        })
         it('Case: Oprning Flow page', async function () {
-            await fun.open(endpoints.HOME);
-            await fun.loginUser();
-            await fun.waitForEndpoint(endpoints.PROJECT , 60000);
-            await fun.clickOnProjectName();
-            await fun.waitForScriptSlider();
-            await fun.clickOnNewFlow();
-            await fun.clickOnScript();
-            await fun.closeSlider(); // close trigger slider
-            await fun.waitForFlowPageToOpen();
+            await funDrag.open(endpoints.HOME);
+            await funDrag.loginUser();
+            await funDrag.waitForEndpoint(endpoints.PROJECT , 60000);
+            await funDrag.clickOnProjectName();
+            await funDrag.waitForScriptSlider();
+            await funDrag.clickOnNewFlow();
+            await funDrag.clickOnScript();
+            await funDrag.closeSlider(); // close trigger slider
+            await funDrag.waitForFlowPageToOpen();
         }).timeout(60000);
 
             it('Case: Creating Elements to drag and drop', async function () {
-            await fun.clickOnAddSteps();
-            await fun.getAllStepsUsedFlow();
-            await fun.clickOnStep(stepIndex.FUNCTION);
-            await fun.funName("fun01");
-            await fun.closeSliderFun();
+            await funDrag.clickOnAddSteps();
+            await funDrag.getAllStepsUsedFlow();
+            await funDrag.clickOnStep(stepIndex.FUNCTION);
+            await funDrag.funName("fun01");
+            await funDrag.closeSliderFun();
 
-            await fun.clickOnAddSteps();
-            await fun.getAllStepsUsedFlow();
-            await fun.clickOnStep(stepIndex.FUNCTION);
-            await fun.funName("fun02");
-            await fun.closeSliderFun(); 
+            await funDrag.clickOnAddSteps();
+            await funDrag.getAllStepsUsedFlow();
+            await funDrag.clickOnStep(stepIndex.FUNCTION);
+            await funDrag.funName("fun02");
+            await funDrag.closeSliderFun(); 
 
-            await fun.clickOnAddSteps();
-            await fun.getAllStepsUsedFlow();
-            await fun.clickOnStep(stepIndex.FUNCTION);
-            await fun.funName("fun03");
-            await fun.closeSliderFun(); 
+            await funDrag.clickOnAddSteps();
+            await funDrag.getAllStepsUsedFlow();
+            await funDrag.clickOnStep(stepIndex.FUNCTION);
+            await funDrag.funName("fun03");
+            await funDrag.closeSliderFun(); 
         }).timeout(60000);
 
             it('Case: Drag and Drop Elements', async function () {
 
-           const successMessage= await fun.DragAndDrop();
+           const successMessage= await funDrag.DragAndDrop();
             expect(successMessage).to.equal('Drag and drop successful');
         }).timeout(60000);
         
         after(async() => {
-            fun.close();
+            funDrag.close();
            })
     });
 }
 
-module.exports = testFunction;
+module.exports = testDragFunction;

@@ -2,16 +2,19 @@ const ResponseAndWebhook = require('../pages/Flow/response.js');
 
 const {endpoints } = require('../enums.js');
 const { expect } = require('chai');
-const { exitCode } = require('process');
-const { CONNREFUSED } = require('dns');
-const getUniqueName = require('../../utilities/getDate');
+// const { exitCode } = require('process');
+// const { CONNREFUSED } = require('dns');
+// const getUniqueName = require('../../utilities/getDate');
 
 
-const responseAndWebhook= new ResponseAndWebhook();
 
 async function testWebhookResponse(){
         
             describe('Webhook Test Script', function () {
+                let responseAndWebhook;
+                before(() => {
+                    responseAndWebhook = new ResponseAndWebhook();
+                })
                 it('Opening and creating webhook block ', async function () {
                     //webhook
                     await responseAndWebhook.open(endpoints.HOME);

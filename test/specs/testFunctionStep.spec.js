@@ -5,10 +5,13 @@ const { exitCode } = require('process');
 const { CONNREFUSED } = require('dns');
 const { waitForDebugger } = require('inspector');
 
-const fun= new Function();
 
 async function testFunction(){
             describe('Function Test Script', function () {
+                let fun;
+                before(() => {
+                    fun = new Function();
+                })
                 it('Case:01 Function Block clicked', async function () {
                     await fun.open(endpoints.HOME);
                     await fun.loginUser();

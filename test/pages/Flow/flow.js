@@ -139,6 +139,7 @@ class FlowPage extends Projects{
     }
 
     async clickOnStep(index){
+        await this.driver.sleep(1000);
         await this.steps[index].click();
         await super.waitForContentToLoad(By.css(`[class*=${process.env.CUSTOM_SLIDER_CLASS}]`) , 10000);
         // await this.driver.sleep(1000);
@@ -233,6 +234,10 @@ class FlowPage extends Projects{
         await this.createButton.click();
     }
 
+    async sleepAfterCreate() {
+        await this.driver.sleep(1000);
+    }
+
     async waitForStepToCreate(){
         try{
             await super.waitForContentToLoad(By.css('[class*="dndrop-container"]') , 10000);
@@ -279,12 +284,13 @@ class FlowPage extends Projects{
 
         const requestMethodList = await requestMethodListDiv.findElements(By.css('li'));
         await requestMethodList[methodTypeIndex].click();
-        await super.waitForContentToBeNotVisible(requestMethodListDiv , 10000);
+        // await super.waitForContentToBeNotVisible(requestMethodListDiv , 10000);
     }
 
     async getSelectedApiMethod(){
         const apiMethodDropDown = await this.apiContent.findElement(By.css('input'));
         const text = await apiMethodDropDown.getAttribute('value');
+        // console.log(text);
         return text.toUpperCase();
     }
 
@@ -293,7 +299,8 @@ class FlowPage extends Projects{
             const textEditorDiv = await this.apiContent.findElement(By.id('jsonEditor'));
             const textEditor = await textEditorDiv.findElement(By.css('textarea'));
             if(requestMethodIndex === 1) await textEditor.sendKeys(process.env.POST_REQUEST_BODY);
-            else await textEditor.sendKeys(process.env.PUT_REQUEST_BODY);
+            if(requestMethodIndex === 2) await textEditor.sendKeys(process.env.PUT_REQUEST_BODY);
+            if(requestMethodIndex === 4) await textEditor.sendKeys(process.env.PUT_REQUEST_BODY);
             await this.driver.sleep(1000);
         } 
     }
@@ -308,7 +315,7 @@ class FlowPage extends Projects{
         await apiname.sendKeys(Key.ENTER);
         const api=await this.driver.findElement(By.id("requestInput"))
         await api.click();
-        await api.sendKeys("https://v2.jokeapi.dev/joke/Any?type=single");
+        await api.sendKeys("https://jsonplaceholder.typicode.com/posts/1");
         //now we fetch Dry Run ----- Save ----- Debug ...... Button
         const listButtons=await this.driver.findElement(By.className("apiActionContainer MuiBox-root css-0"));
         const buttonArray=await listButtons.findElements(By.tagName("button"));

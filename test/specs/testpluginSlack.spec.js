@@ -48,7 +48,9 @@ async function testpluginSlack() {
 
 
         }).timeout(700000);
-
+       after(async() => {
+            slack.close();
+           })
 
     });
 };

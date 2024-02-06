@@ -61,7 +61,7 @@ async function testIfBlockStep(){
            
             const num = Math.floor(comparisonResult.rawMisMatchPercentage);
             expect(num).to.be.lessThan(20);
-            await ifStep.crossIfBlock();
+            // await ifStep.crossIfBlock();
             // await ifStep.crossIfBlock();
             // await ifStep.deleteIfBlock();
         }).timeout(700000);

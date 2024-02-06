@@ -1,12 +1,15 @@
-const Function = require('../pages/Flow/function.js');
+const Functions = require('../pages/Flow/function.js');
 const {endpoints , stepIndex} = require('../enums');
 const { expect } = require('chai');
 
 
-const fun= new Function();
-
 async function testFunction(){
+   
             describe('Step Duplicate', function () {
+                let fun;
+                before(() => {
+                    fun = new Functions();
+                })
                 it('Case:01 Creating function', async function () {
                     await fun.open(endpoints.HOME);
                     await fun.loginUser();

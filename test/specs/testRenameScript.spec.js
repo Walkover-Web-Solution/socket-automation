@@ -6,10 +6,15 @@ const uniqueValue = getUniqueName('new');
 
 
 
-const projectPage= new ProjectPage();
+
 
 async function testRenameScript(){
+  
     describe('Rename Test script', function () {
+      let projectPage;
+  before(() => {
+    projectPage = new ProjectPage();
+  })
         it('Case:01 rename', async function () {
           await projectPage.open(endpoints.HOME);
           await projectPage.loginUser();
