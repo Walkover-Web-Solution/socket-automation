@@ -34,9 +34,9 @@ dotenv.config();
 // const testRenameScript=require('./test/specs/testRenameScript.spec')
 // const moveScript=require('./test/specs/testMoveScript.spec');
 // const duplicateScript=require('./test/specs/testDuplicateScript.spec')
-// const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
+const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
 // const testLiveFlow = require('./test/specs/testLiveFlow.spec');
-
+// const testLogDryRun = require('./test/specs/testLogDryRun.spec');
 
 
 async function test(){
@@ -61,15 +61,12 @@ async function test(){
     // await testRenameScript();
 //     await moveScript();
     // await duplicateScript();
-    // await testSheetPlugin();
-    // await testLiveFlow();
-    await testpluginSlack(); 
+    await testSheetPlugin();
+    // await testpluginSlack(); 
     // await testdiscardflow();
-<<<<<<< HEAD
-    await ifflowwork();
-=======
-    await textflow()
->>>>>>> 24c2ca64a916d1ca101266b6009f9e266b2d5cd9
+    // await textflow()
+    // await testLiveFlow();
+    // await testLogDryRun();
 }
 
 // test();

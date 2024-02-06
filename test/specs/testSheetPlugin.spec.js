@@ -1,51 +1,70 @@
-//Here we write test cases of IF Block
-
 const FlowPage = require('../pages/Flow/flow');
 const Sheets = require('../pages/Flow/sheetPlugin');
 const {endpoints , stepIndex , apiIndex} = require('../enums');
-// const IfStep=require('../pages/Flow/if');
 const {expect}=require('chai');
-const getUniqueName = require('../../utilities/getDate');
 
-async function testIfBlockStep(){
+async function testSheetPlugin(){
     
     let sheets;
-    describe('test cases for IF condition under flowPage',async function(){
+    let sheetId = '1Qzi54LJ1yVL-M4J5LEAs97runpMAzRI_vUt56WpsGAM';
+    let responseData;
+    describe('Test cases google sheet plugin',async function(){
         before(() => {
             sheets = new Sheets();
         })
 
-        it("if block created successfully with true condtiton",async function(){
+        it("Should render google sheet step",async function(){
             await sheets.open(endpoints.HOME);
             await sheets.loginUser();
             await sheets.waitForEndpoint(endpoints.PROJECT , 60000);
             await sheets.clickOnProjectName();
             await sheets.waitForScriptSlider();
             await sheets.clickOnNewFlow();
-            // await ifStep.clickOnScript();
             await sheets.closeSlider(); // close trigger slider
             await sheets.waitForFlowPageToOpen();
             await sheets.clickOnAddSteps();
             await sheets.getAllStepsUsedFlow();
-            // await flowPage.clickOnStep(stepIndex.SHEETS);
             await sheets.clickOnSheets();
+            await sheets.takeSheetOptionsScreenShortAndSave('sheetOptionField.png');
             await sheets.clickAddSheet();
+            const isCaptureMode = await sheets.isCaptureMode;
+                if(isCaptureMode) return;
+                const comparisonResult = await sheets.compareScreenShot('sheetOptionField.png'); 
+                const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+                expect(num).to.be.lessThan(20);
+            
+        }).timeout(700000);
+
+
+        it('Should enter and authorize auth id' , async() => {
             await sheets.clickSelectMenuOnAddSheet();
             await sheets.enterAuthId('auth2zI9JksP');
+
+            const alertBox = sheets.errorBox();
+            expect(alertBox).to.not.equal('success','Verified');         
+        }).timeout(30000);
+
+
+        it('Should enter fields', async() => {
+            await sheets.takeSheetDetailsScreenShortAndSave('googleAddSheetDetails.png');
             await sheets.enterFields();
-            // await flowPage.select
-            // await flowPage.createConditionIf("true");
-            // const text_name=await ifStep.responseOfIfBlockIf();
-            // expect(text_name).to.include("true");
-            // await ifStep.takeScreenShotFunctionSlider('ifTrue.png');
-            // const isCaptureMode = await ifStep.isCaptureMode;
-            // if(isCaptureMode) return;
-            // const comparisonResult = await ifStep.compareScreenShot('ifTrue.png'); 
-            // const num = Math.floor(comparisonResult.rawMisMatchPercentage);
-            // expect(num).to.be.lessThan(20);
-            // await ifStep.crossIfBlock();
-            // await ifStep.deleteIfBlock();
-        }).timeout(700000);
+
+            const isCaptureMode = await sheets.isCaptureMode;
+                if(isCaptureMode) return;
+                const comparisonResult = await sheets.compareScreenShot('googleAddSheetDetails.png'); 
+                const num = Math.floor(comparisonResult.rawMisMatchPercentage);
+                expect(num).to.be.lessThan(20);
+        }).timeout(30000);
+
+        it('Should check response recieved', async() => {
+            responseData = await sheets.getResponseeData();
+            expect(responseData).to.not.include('status');
+        })
+
+        it('Should contain correct spreadsheetid', async() => {
+            const str = `"spreadsheetId":string"${sheetId}"`;
+            expect(responseData).to.include(str);
+        })
     });
 };
 
@@ -53,4 +72,4 @@ async function testIfBlockStep(){
 
 
 
-module.exports=testIfBlockStep;
+module.exports=testSheetPlugin;
