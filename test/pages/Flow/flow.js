@@ -139,6 +139,7 @@ class FlowPage extends Projects{
     }
 
     async clickOnStep(index){
+        await this.driver.sleep(1000);
         await this.steps[index].click();
         await super.waitForContentToLoad(By.css(`[class*=${process.env.CUSTOM_SLIDER_CLASS}]`) , 10000);
         // await this.driver.sleep(1000);
@@ -231,6 +232,10 @@ class FlowPage extends Projects{
         this.createButton = await this.driver.findElement(By.xpath(`//button[text() = "${saveButton}"]`));
         await this.driver.executeScript("arguments[0].scrollIntoView();", this.createButton);
         await this.createButton.click();
+    }
+
+    async sleepAfterCreate() {
+        await this.driver.sleep(1000);
     }
 
     async waitForStepToCreate(){

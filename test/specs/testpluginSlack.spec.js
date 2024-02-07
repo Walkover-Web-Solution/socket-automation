@@ -48,10 +48,10 @@ async function testpluginSlack() {
 
 
         }).timeout(700000);
-       
-        after(async() => {
+       after(async() => {
             slack.close();
            })
+
     });
 };
 

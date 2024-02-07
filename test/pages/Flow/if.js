@@ -2,7 +2,6 @@ const {endpoints} = require('../../enums');
 const {By,until,Key} = require('selenium-webdriver');
 const FlowPage=require('./flow');
 
-
 class IfBlock extends FlowPage{
 
     constructor(){
@@ -54,17 +53,8 @@ class IfBlock extends FlowPage{
 
     // Use a CSS selector to find the element with the specific placeholder text
     const nestedstep = await this.driver.findElement(By.css('[placeholder="Add or drop step here"]'), 1000);
+    await nestedstep.click();
 
-    // Check if the element is found
-    if (nestedstep) {
-        console.log('Element with placeholder "Add or drop step here" is present.');
-
-        // Click on the element
-        await nestedstep.click();
-    } else {
-        console.log('Element with placeholder "Add or drop step here" is not present.');
-        // Handle the case where the element is not found as needed
-    }
 }
 
     
@@ -100,6 +90,7 @@ class IfBlock extends FlowPage{
     }
 
     async testAndUpdate() {
+        
         const parentElement = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont .flex-start-center')), 5000);
 
         const buttons = await parentElement[1].findElements(By.css('button'));
@@ -108,6 +99,43 @@ class IfBlock extends FlowPage{
         await buttons[1].click();
         await this.driver.sleep(2000);
     }
+
+  
+    async addVariableData(){
+        const addVar=await this.driver.findElement(By.className('addvariables'));
+        await addVar.click();
+    }
+
+    async writeFunction(content){
+        await super.waitForContentToLoad(By.css('[class*="custom_slider__halfscreen"]'));
+        const functionBlock= await this.driver.findElement(By.css('[class*="custom_slider__halfscreen"]'));
+        const editor = await functionBlock.findElement(By.className('ace_comment ace_placeholder'));
+        await editor.click();
+        const textArea= functionBlock.findElement(By.className('ace_text-input'));
+        textArea.sendKeys(content);
+       
+    }
+    async clickOnWebHook() {
+        // const webHookBtn = await this.driver.wait(until.elementLocated(By.xpath('/html/body/div/div/div[3]/div/div[3]/div[5]/div/div/div/div[2]/div/div/div[2]/button[1]')), 5000);
+        const webHookBtn = await this.driver.wait(until.elementLocated(By.id('0option')), 5000);
+        await webHookBtn.click();     
+    }
+
+    async clickSelectTrigger() {
+        const selectTriggerBtn = await this.driver.wait(until.elementLocated(By.xpath('//*[@id="root"]/div/div[3]/div/div[3]/div[3]/div/div[1]/div[1]/div/div[1]/div[2]/div/div/div/div/h2')), 5000);
+        await selectTriggerBtn.click();
+    }
+
+    async clickOnTest(){
+        // const navBar = await this.driver.wait(unt)
+        const buttons = await this.driver.wait(until.elementsLocated(By.css('.workflownavbar button')), 5000);
+        await buttons[3].click();
+        const click2= await this.driver.wait(until.elementLocated(By.xpath('//*[@id=":r2t:"]/span[1]')), 5000);
+
+        await click2.click();
+
+    }
+
 
     
     
