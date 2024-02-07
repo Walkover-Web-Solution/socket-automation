@@ -23,12 +23,21 @@ class MakeLive extends FlowPage{
     }
 
 
-    async testAndUpdate() {
+    async clickTest() {
         const parentElement = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont .flex-start-center')), 5000);
 
         const buttons = await parentElement[1].findElements(By.css('button'));
         await buttons[0].click();
-        await this.driver.sleep(2000);
+        // await this.driver.sleep(2000);
+        await super.waitForContentToLoad(By.className('react-json-view'), 8000);
+        
+    }
+
+
+    async clickUpdate() {
+        const parentElement = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont .flex-start-center')), 5000);
+        const buttons = await parentElement[1].findElements(By.css('button'));
+
         await buttons[1].click();
         await this.driver.sleep(2000);
     }
@@ -56,7 +65,6 @@ class MakeLive extends FlowPage{
 
     async takeAPIFieldScreenShotAndSave(imagePath) {
         await this.driver.sleep(1000);
-        // const apiField = await this.driver.wait(until.elementLocated(By.xpath('/html/body/div[1]/div/div[3]/div/div[3]/div[5]/div/div/div/div[2]/div[2]')), 5000);
         const apiField = await this.driver.wait(until.elementLocated(By.id('panel1a-content')), 5000);
         const screenShot = await apiField.takeScreenshot();
         await super.takeScreenShotAndSave(screenShot, imagePath);
@@ -77,6 +85,15 @@ class MakeLive extends FlowPage{
     async getStepsArray() {
         const arr = await this.driver.wait(until.elementsLocated(By.css('.dndrop-container .width-container')), 5000);
         return arr;
+    }
+
+    async getResponseeData()
+    {
+        // await this.driver.sleep(5000);
+        await super.waitForContentToLoad(By.className('react-json-view'), 10000);
+        const responseContainer = await this.driver.findElement(By.className('react-json-view'), 5000);
+        let text = await responseContainer.getText();
+        return text;
     }
 }
 

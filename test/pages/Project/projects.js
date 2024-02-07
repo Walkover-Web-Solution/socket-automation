@@ -184,6 +184,7 @@ contentEnter.sendKeys(content);
     }
 
     async errorBox(){
+        await super.waitForContentToLoad(By.id('alert-container-0'), 3000);
         const error1 = await this.driver.findElement(By.id('alert-container-0'));
         const pageSource = await this.driver.getPageSource();
         fs.writeFileSync('pageSource.txt' , pageSource , 'utf-8');

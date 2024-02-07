@@ -41,8 +41,11 @@ async function testSheetPlugin(){
             await sheets.clickSelectMenuOnAddSheet();
             await sheets.enterAuthId('auth2zI9JksP');
 
-            const alertBox = sheets.errorBox();
-            expect(alertBox).to.not.equal('success','Verified');         
+            const alertBox = await sheets.errorBox();
+            const lines = alertBox.split(/\r?\n/);
+
+            const expectedArray = ['success', 'Verified'];  
+            expect(lines).to.deep.equal(expectedArray);     
         }).timeout(30000);
 
 
