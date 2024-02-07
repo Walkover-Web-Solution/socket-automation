@@ -11,10 +11,10 @@ dotenv.config();
 // const testPauseProject = require('./test/specs/testPauseProject.spec');
 // const testInvocation = require('./test/specs/testInvocation_prod.spec');
 // const testDragAndDrop = require('./test/specs/testDragAndDrop.spec');
-// // const testAddSteps = require('./test/specs/testAddSteps.spec');
-// // const testAskAI = require('./test/specs/testAskAI.spec');
-// // const testMoveProject=require('./test/specs/testMoveProject.spec');
-// const testpluginSlack = require('./test/specs/testpluginSlack.spec');
+// const testAddSteps = require('./test/specs/testAddSteps.spec');
+// const testAskAI = require('./test/specs/testAskAI.spec');
+// const testMoveProject=require('./test/specs/testMoveProject.spec');
+const testpluginSlack = require('./test/specs/testpluginSlack.spec');
 // const testdiscardflow = require('./test/specs/testdiscardflow.spec');
 // const testLogin = require('./test/specs/testLogin.spec');
 // const testRenameProject= require('./test/specs/testRenameProject.spec');
@@ -27,7 +27,7 @@ dotenv.config();
 // const {testPatchStep} = require('./test/specs/testApiStep.spec');
 // const testFunction = require('./test/specs/testFunctionStep.spec');
 // const testIfBlockStep = require('./test/specs/testIfBlockStep.spec')
-// // const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
+// const testInvocation_dev = require('./test/specs/testInvocation_dev.spec');
 // const webhookResponse = require('./test/specs/testWebhookResponse.spec');
 // const Comment = require('./test/specs/testCommentStep.spec');
 // const deleteStep =require('./test/specs/testDeleteStep.spec');
@@ -39,7 +39,6 @@ dotenv.config();
 // const testLiveFlow = require('./test/specs/testLiveFlow.spec');
 // const testLogDryRun = require('./test/specs/testLogDryRun.spec');
 // const ifflowwork = require('./test/specs/ifflowwork.spec');
-const testLogCreation = require('./test/specs/testLogCreation.spec');
 
 
 async function test(){
@@ -55,6 +54,8 @@ async function test(){
     // await testAskAI ();
     // // await testMoveProject();
     // await testpluginSlack();
+    // await testMoveProject();
+    await testpluginSlack();
     // await testdiscardflow ();
     // await testLogin ();
     // await testRenameProject();
@@ -68,6 +69,7 @@ async function test(){
     // await testFunction ();
     // await testIfBlockStep ();
     // // await testInvocation_prod ();
+    // await testInvocation_prod ();
     // await webhookResponse ();
     // await Comment();
     // await deleteStep ();
@@ -80,6 +82,7 @@ async function test(){
     // await testLogDryRun();
     // await ifflowwork ();
     await testLogCreation();
+
 
 }
 

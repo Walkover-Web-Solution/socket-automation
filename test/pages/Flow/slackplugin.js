@@ -24,19 +24,24 @@ class Slack extends FlowPage {
         await SlackMessage.click();
     }
     async clickOnSelectButtonInSlack() {
-        const selectingSlack = await this.driver.wait(until.elementLocated(By.className('MuiFormControl-root w-100 css-198mb5z')));
+        const selectingSlack = await this.driver.wait(until.elementLocated(By.css('[aria-haspopup="listbox"]')));
         await selectingSlack.click();
     }
 
     async SelectingOption() {
         const FirstOption = await this.driver.wait(until.elementLocated(By.className('authDropDownSpan')), 5000);
         await FirstOption.click();
+       
+    }
+
+    async enterAuthId(id){
         const ThirdOption = await this.driver.wait(until.elementLocated(By.css('[placeholder="Auth ID"]')), 5000);
         await ThirdOption.click();
         await ThirdOption.sendKeys('auth2jzYTnsZ');
     }
 
     async clickOnVerify() {
+        
         const masterSliderBtns = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont button')), 5000);
         const verifyBtn = masterSliderBtns[4];
         verifyBtn.click();
@@ -54,7 +59,7 @@ class Slack extends FlowPage {
         const textArea = await FillingOption[1].findElement(By.css('textarea'));
         await textArea.sendKeys('walkover');
 
-        const clickingtest = await this.driver.wait(until.elementsLocated(By.className('MuiButton-endIcon MuiButton-iconSizeMedium')), 5000);
+        const clickingtest = await this.driver.wait(until.elementsLocated(By.css('[data-testid="PlayArrowRoundedIcon"]')), 5000);
         await clickingtest[1].click();
 
     }

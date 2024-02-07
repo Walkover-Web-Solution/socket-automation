@@ -20,11 +20,7 @@ class Discard extends FlowPage{
         apiBtn.click();
     }
    
-    // async enterURL() {
-    //     await this.driver.sleep(1000);
-    //     const urlTextArea = await this.driver.wait(until.elementsLocated(By.className('input-parent pos-rel')), 5000);
-    //     await urlTextArea[1].sendKeys('https://jsonplaceholder.typicode.com/posts');
-    // }
+   
 
     async enterURL() {
         await this.driver.sleep(1000);
@@ -34,12 +30,22 @@ class Discard extends FlowPage{
     }
 
     
-    async testAndUpdate() {
+   
+
+    async clickTest() {
         const parentElement = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont .flex-start-center')), 5000);
 
         const buttons = await parentElement[1].findElements(By.css('button'));
         await buttons[0].click();
-        await this.driver.sleep(2000);
+        // await this.driver.sleep(2000);
+        await super.waitForContentToLoad(By.className('react-json-view'), 8000);
+        
+    }
+
+    async clickUpdate() {
+        const parentElement = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont .flex-start-center')), 5000);
+        const buttons = await parentElement[1].findElements(By.css('button'));
+
         await buttons[1].click();
         await this.driver.sleep(2000);
     }
@@ -57,16 +63,12 @@ class Discard extends FlowPage{
     }
 
     async addNewStep(){
-        const stepclick = await this.driver.wait(until.elementLocated(By.className('flex-start-center search_textfield  create-function-input pl-2')), 5000);
+        const stepclick = await this.driver.wait(until.elementLocated(By.id('root-add-step-button')), 5000);
         stepclick.click();
 
     }
 
-    // async DiscardClick(){
-       
-    //     const stepsclick = await this.driver.wait(until.elementLocated(By.className('publishblockButtonShow')), 5000);
-    //     stepsclick.click();
-    // }
+  
 
     async OkButtonClick(){
 
@@ -77,8 +79,8 @@ class Discard extends FlowPage{
     }
 
     async takeflowStepScreenShotAndSave(imagePath) {
-        const flowField = await this.driver.wait(until.elementLocated(By.className('w-100 workflow__flow flex-col gap-2 MuiBox-root css-0')), 5000);
-        const screenShot = await flowField.takeScreenshot();
+        const flowField = await this.driver.wait(until.elementsLocated(By.className('workflow__flow')), 5000);
+        const screenShot = await flowField[1].takeScreenshot();
         await super.takeScreenShotAndSave(screenShot, imagePath);
     }
 
@@ -87,12 +89,13 @@ class Discard extends FlowPage{
         await element[1].click();
     }
     async takeflowStepAfterScreenShotAndSave(imagePath) {
-        const flowField = await this.driver.wait(until.elementLocated(By.className('w-100 workflow__flow flex-col gap-2 MuiBox-root css-0')), 5000);
-        const screenShot = await flowField.takeScreenshot();
+        const flowField = await this.driver.wait(until.elementsLocated(By.className('workflow__flow')), 5000);
+        const screenShot = await flowField[1].takeScreenshot();
         await super.takeScreenShotAndSave(screenShot, imagePath);
     }
     async getStepsArray() {
-        const arr = await this.driver.wait(until.elementsLocated(By.css('.dndrop-container .width-container')), 5000);
+        // const arr = await this.driver.wait(until.elementsLocated(By.css('.dndrop-container .width-container')), 5000);
+        const arr = await this.driver.findElements(By.css('.dndrop-container .width-container'));
         return arr;
     }
 }

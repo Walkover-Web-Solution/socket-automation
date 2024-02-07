@@ -15,32 +15,16 @@ async function testdiscardflow() {
             discard = new Discard();
         })
 
-        it("flow reverted successfully", async function () {
+        it("checking Do entry before creating new flow", async function () {
             await discard.open(endpoints.HOME);
             await discard.loginUser();
-            await discard.waitForEndpoint(endpoints.PROJECT, 60000);
+            await discard.waitForEndpoint(endpoints.PROJECT , 60000);
             await discard.clickOnProjectName();
             await discard.waitForScriptSlider();
             await discard.clickOnNewFlow();
             await discard.webhookClick();
             await discard.closeSlider(1);
             await discard.takeflowStepScreenShotAndSave('flowstep.png');
-            // // await discard.clickSelectTrigger();
-            await discard.addNewStep();
-            await discard.clickOnAPI();
-            await discard.enterURL();
-            await discard.testAndUpdate();
-            await discard.closeSlider(1);
-            await discard.DiscardClick();
-            await discard.OkButtonClick();
-            await discard.clickAnyWhere();
-            await discard.takeflowStepAfterScreenShotAndSave('flowstep.png');
-  
-            //checking the discard flow if the flow discard successfully than step array will have 0 element
-            const stepsArray = await live.getStepsArray();
-            expect(stepsArray.length).to.equal(0);
-
-            //vrt on discard flow
             const isCaptureMode = await discard.isCaptureMode;
             if (isCaptureMode) return;
             const comparisonResult1 = await discard.compareScreenShot('flowstep.png');
@@ -48,7 +32,60 @@ async function testdiscardflow() {
             expect(num1).to.be.lessThan(20);
         }).timeout(700000);
 
+            it("Should generate response successfully and update Api",async function(){
+                await discard.addNewStep();
+                await discard.clickOnAPI(); 
+                await discard.enterURL();
+                await discard.clickTest();
+    
+                const responseData = await discard.getResponseData();
+                expect(responseData).to.not.include('status');
+    
+                await discard.clickUpdate();
+                await discard.closeSlider(1);
+                await discard.DiscardClick();
+                // await discard.DiscardClick();
+                // await discard.OkButtonClick();
+                //   await discard.DiscardClick();
+                
 
+            }).timeout(50000);
+
+            it('should revert the flow',async function(){
+                   await discard.DiscardClick();
+                   await discard.OkButtonClick();
+                   await discard.clickAnyWhere();
+
+                   const alertBox=await discard.errorBox();
+                   const lines = alertBox.split(/\r?\n/);
+                   const expectedArray=['success','Flow reverted successfully'];
+                   expect(lines).to.deep.equal(expectedArray);
+
+             }).timeout(50000);
+
+             it("checked after discard there is no flow inside DO",async function(){
+                //   await discard.clickAnyWhere();
+                  await discard.takeflowStepAfterScreenShotAndSave('flowstep.png');
+                   const isCaptureMode = await discard.isCaptureMode;
+            if (isCaptureMode) return;
+            const comparisonResult1 = await discard.compareScreenShot('flowstep.png');
+            const num1 = Math.floor(comparisonResult1.rawMisMatchPercentage);
+            expect(num1).to.be.lessThan(20);
+
+             }).timeout(70000);
+
+             it('should have no step inside do',async function(){
+                //  await discard.clickAnyWhere();
+             const stepsArray = await discard.getStepsArray();
+             expect(stepsArray.length).to.equal(0);
+
+             }).timeout(70000);
+            
+
+
+             after(async() => {
+                discard.close();
+               })
 
     });
 };

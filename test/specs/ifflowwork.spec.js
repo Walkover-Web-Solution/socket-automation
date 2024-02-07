@@ -15,7 +15,7 @@ async function ifflowwork(){
             ifStep=new IfStep()
         })
 
-        it("Opening and creating new flow and creating a new variable to store variable",async function(){
+        it("Opening and creating new flow and creating a new variable to store value",async function(){
             await ifStep.open(endpoints.HOME);
             await ifStep.loginUser();
             await ifStep.waitForEndpoint(endpoints.PROJECT , 60000);
@@ -105,6 +105,7 @@ async function ifflowwork(){
             
             await ifStep.responseFunction();
             await ifStep.customResponseEnter("context?.vals?.responseMessage");
+            await ifStep.sleepAfterCreate();
             await ifStep.clickOnTest();
 
         }).timeout(700000);
