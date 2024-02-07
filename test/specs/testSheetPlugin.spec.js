@@ -5,19 +5,11 @@ const {expect}=require('chai');
 
 async function testSheetPlugin(){
     
-<<<<<<< HEAD
-    let sheets;
-<<<<<<< Updated upstream
     let sheetId = '1Qzi54LJ1yVL-M4J5LEAs97runpMAzRI_vUt56WpsGAM';
     let responseData;
     describe('Test cases google sheet plugin',async function(){
-=======
-=======
-    // let flowPage;
->>>>>>> 4272e60a249121c9adb4d3ea20d1fe32f035894e
-    describe('test cases for IF condition under flowPage',async function(){
+
         let sheets;
->>>>>>> Stashed changes
         before(() => {
             sheets = new Sheets();
         })
