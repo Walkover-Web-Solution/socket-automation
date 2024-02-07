@@ -78,6 +78,9 @@ async function testMakeLive(){
             expect(stepsArray.length).to.equal(1);
         }).timeout(700000);
 
+        after(async()=>{
+            await live.close();
+        })
     });
 };
 

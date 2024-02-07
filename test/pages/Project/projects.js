@@ -77,7 +77,6 @@ class Projects extends Login{
     }
 
     async customResponseEnter(content){
-        console.log('here');
         await super.waitForContentToLoad(By.className('responseslider__container w-100 column   MuiBox-root css-0'),10000);
         
         const resSlider= await this.driver.findElement(By.className('mt-1 pos-rel MuiBox-root css-0')) ;
@@ -86,7 +85,6 @@ class Projects extends Login{
         
         await super.waitForContentToLoad(By.xpath("//*[text()='//Write return statement here...']"))
         const contentBtn= await resSlider.findElement(By.xpath("//*[text()='//Write return statement here...']"));
-        console.log('here 2');
         contentBtn.click();
         const contentEnter= await resSlider.findElement(By.className("ace_text-input"));
         contentEnter.sendKeys("")

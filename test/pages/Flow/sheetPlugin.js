@@ -45,8 +45,10 @@ class Sheets extends FlowPage{
         dynamicAuthBtn.click();
 
         const authIdInput = await this.driver.wait(until.elementLocated(By.css('[placeholder="Auth ID"]')), 5000);
-        authIdInput.sendKeys('auth2zI9JksP');
-        
+        authIdInput.sendKeys(id);
+    }
+
+    async verifyAuthId() {
         const masterSliderBtns = await this.driver.wait(until.elementsLocated(By.css('.masterslider_cont button')), 5000);
         const verifyBtn = masterSliderBtns[4];
 

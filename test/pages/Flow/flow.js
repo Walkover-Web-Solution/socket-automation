@@ -567,6 +567,25 @@ async dryrunbtn(){
     const dry_run =  await this.driver.findElement(By.className("dry-run-btn"))
     await dry_run.click()
 }
+
+async openLogHistorySlider() {
+    const logSlider = await this.driver.findElement(By.className('logs_slider'));
+    logSlider.click();
+}
+
+async getLogsCount() {
+    // await super.waitForContentToBeNotVisible(By.className('Mui-disabled'), 3000);
+    await this.driver.sleep(1000);
+    const logSlider = await this.driver.findElement(By.className('logs_slider'));
+    const logs = await logSlider.findElements(By.className('logs'));
+    return logs.length;
+}
+
+async waitForCustomResponse(responseText) {
+    // await super
+    const responseDiv = await this.driver.findElement(By.id('json-pretty'));
+    await this.driver.wait(until.elementTextContains(responseDiv, responseText), 10000);
+}
 }
 
 module.exports = FlowPage;

@@ -40,7 +40,7 @@ async function testSheetPlugin(){
         it('Should enter and authorize auth id' , async() => {
             await sheets.clickSelectMenuOnAddSheet();
             await sheets.enterAuthId('auth2zI9JksP');
-
+            await sheets.verifyAuthId();
             const alertBox = await sheets.errorBox();
             const lines = alertBox.split(/\r?\n/);
 
@@ -68,6 +68,10 @@ async function testSheetPlugin(){
         it('Should contain correct spreadsheetid', async() => {
             const str = `"spreadsheetId":string"${sheetId}"`;
             expect(responseData).to.include(str);
+        })
+
+        after(async()=>{
+            await sheets.close();
         })
     });
 };
