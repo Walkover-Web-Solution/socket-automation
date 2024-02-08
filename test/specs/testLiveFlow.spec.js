@@ -72,7 +72,6 @@ async function testMakeLive(){
             expect(num2).to.be.lessThan(20);
         })
 
-
         it("Should have one step in do", async function () {
             const stepsArray = await live.getStepsArray();
             expect(stepsArray.length).to.equal(1);

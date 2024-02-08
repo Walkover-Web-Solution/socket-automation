@@ -14,7 +14,7 @@ dotenv.config();
 // const testAddSteps = require('./test/specs/testAddSteps.spec');
 // const testAskAI = require('./test/specs/testAskAI.spec');
 // const testMoveProject=require('./test/specs/testMoveProject.spec');
-const testpluginSlack = require('./test/specs/testpluginSlack.spec');
+// const testpluginSlack = require('./test/specs/testpluginSlack.spec');
 // const testdiscardflow = require('./test/specs/testdiscardflow.spec');
 // const testLogin = require('./test/specs/testLogin.spec');
 // const testRenameProject= require('./test/specs/testRenameProject.spec');
@@ -37,7 +37,7 @@ const testpluginSlack = require('./test/specs/testpluginSlack.spec');
 // const testDeleteProject=require('./test/specs/testDeleteProject.spec')
 // const testSheetPlugin = require('./test/specs/testSheetPlugin.spec');
 // const testLiveFlow = require('./test/specs/testLiveFlow.spec');
-// const testLogDryRun = require('./test/specs/testLogDryRun.spec');
+const testLogDryRun = require('./test/specs/testLogDryRun.spec');
 // const ifflowwork = require('./test/specs/ifflowwork.spec');
 
 
@@ -55,7 +55,7 @@ async function test(){
     // // await testMoveProject();
     // await testpluginSlack();
     // await testMoveProject();
-    await testpluginSlack();
+    // await testpluginSlack();
     // await testdiscardflow ();
     // await testLogin ();
     // await testRenameProject();
@@ -79,9 +79,9 @@ async function test(){
     // await testDeleteProject();
     // await testSheetPlugin ();
     // await testLiveFlow ();
-    // await testLogDryRun();
+    await testLogDryRun();
     // await ifflowwork ();
-    await testLogCreation();
+    // await testLogCreation();
 
 
 }
